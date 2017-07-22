@@ -1,0 +1,20 @@
+<section class="container">
+  <br>
+  <!---- Search for recipes ------>
+  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="vm.search();">
+    <fieldset class="row">
+      <div class="input-group">
+        <input autocomplete="off" id="messageText" name="messageText" class="form-control" ng-model="vm.messageText" placeholder="search" autofocus>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" ng-disabled="!vm.messageText.length">Search</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
+
+  <!--- Results ---->
+  <div class="row" style="margin-top:50px;text-align:center">
+    {{vm.messageText}}
+  </div>
+
+</section>

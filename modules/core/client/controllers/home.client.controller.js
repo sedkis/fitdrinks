@@ -5,7 +5,12 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-  function HomeController() {
+  HomeController.$inject = ['Authentication'];
+
+  function HomeController(authentication) {
     var vm = this;
+    if (authentication.user) {
+      vm.userName = authentication.user.username;
+    }
   }
 }());

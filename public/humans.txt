@@ -3,11 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Sedky Abou-Shamalah -- Software Developer
 
 # THANKS
 
-    <name>
+    To my parents
 
 # TECHNOLOGY COLOPHON
 
