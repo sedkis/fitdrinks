@@ -10,4 +10,4 @@ var Recipe = require('mongoose').model('Recipe');
 */
 module.exports = function (app, db) {
 
-}
+};

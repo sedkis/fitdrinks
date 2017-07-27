@@ -3,11 +3,11 @@
 /**
 * Export Module
 */
-module.exports = function(app){
+module.exports = function(app) {
   // Add dependency
-  var recipes = require('../controllers/recipes.server.controller')
+  var recipes = require('../controllers/recipes.server.controller');
 
   // Setting up the Recipes API
-  app.route('/api/recipes/getRecipe').get(recipes.find);
-
-}
+  app.route('/api/recipes/find').get(recipes.find);
+  app.route('/api/recipes/new').post(recipes.insert);
+};

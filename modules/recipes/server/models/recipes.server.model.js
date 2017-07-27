@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 
 var validateLocalStrategyCalories = function(calories) {
   return validator.isNumeric(calories);
-}
+};
 
 /**
  * Recipe Schema
@@ -19,7 +19,11 @@ var RecipeSchema = new Schema({
   flavour: {
     type: String,
     trim: true,
-    required: 'Please fill in atleast protein flavour'
+    required: 'Please fill in protein flavour'
+  },
+  name: {
+    type: String,
+    trim: true
   },
   ingredients: {
     type: [],
@@ -34,17 +38,12 @@ var RecipeSchema = new Schema({
   type: {
     type: String,
     trim: true,
-    default:''
-  },
-  description: {
-    type: String,
-    trim: true,
     default: ''
   },
   created: {
     type: Date,
     default: Date.now
-  },
+  }
 });
 
 
