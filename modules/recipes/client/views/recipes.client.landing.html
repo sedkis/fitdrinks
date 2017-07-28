@@ -1,6 +1,6 @@
 <section class="container search">
   <!---- Search for recipes ------>
-  <form name="search" style="margin-top:20px;height:300px" class="col-xs-12 col-md-offset-4 col-md-4">
+  <form name="search" style="margin-top:20px;" class="col-xs-12 col-md-offset-4 col-md-4">
     <fieldset class="row">
       <div class="input-group">
         <input autocomplete="off" id="searchText" name="searchText" class="form-control"
@@ -13,9 +13,7 @@
   </form>
   <!--- Results ---->
   <div class="row col-xs-12" style="margin-top:50px;text-align:center">
-    <div ui-grid="{ data: vm.data }" class="myGrid"></div>
-    data: {{vm.data}}
-    searchRes: {{vm.searchResults}}
+    <div ui-grid="vm.resultsGrid" class="myGrid"></div>
   </div>
 </section>
 
@@ -34,7 +32,7 @@
       <div class="col-xs-4">
         <label>Name</label>
         <input autocomplete="off" id="description" name="description" class="form-control"
-               ng-model="vm.description" placeholder="(Optional)" autofocus>
+               ng-model="vm.name" placeholder="(Optional)" autofocus>
       </div>
       <div class="col-xs-4">
         <label>Type</label>

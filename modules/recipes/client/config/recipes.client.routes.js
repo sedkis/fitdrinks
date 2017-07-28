@@ -15,7 +15,7 @@
         controller: 'RecipesController',
         controllerAs: 'vm',
         data: {
-          roles: ['user'],
+          roles: ['user', 'admin'],
           pageTitle: 'Recipes'
         }
       });

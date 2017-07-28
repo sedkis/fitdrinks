@@ -7,13 +7,28 @@
 
   RecipesController.$inject = ['$http'];
 
+  var buildList = function(str) {
+    return str.split('\n');
+  };
+
   function RecipesController($http) {
     var vm = this;
+
+    vm.resultsGrid = {
+      data: vm.data,
+      columnDefs: [
+        { field: 'flavour' },
+        { field: 'name' },
+        { field: 'type' },
+        { field: 'calories' },
+        { field: 'ingredients' }
+      ]
+    };
 
     vm.search = function () {
       $http.get('api/recipes/find').then(function(response) {
         if (response)
-          vm.data = response.data;
+          vm.resultsGrid.data = response.data;
       });
     };
 
@@ -46,10 +61,6 @@
           console.log(error);
         }
       );
-    };
-
-    var buildList = function(str) {
-      return str.split('\n');
     };
 
   }
