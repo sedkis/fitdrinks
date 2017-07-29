@@ -8,6 +8,6 @@ module.exports = function(app) {
   var recipes = require('../controllers/recipes.server.controller');
 
   // Setting up the Recipes API
-  app.route('/api/recipes/find').get(recipes.find);
+  app.route('/api/recipes/find').post(recipes.find);
   app.route('/api/recipes/new').post(recipes.insert);
 };

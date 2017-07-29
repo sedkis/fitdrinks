@@ -12,12 +12,20 @@ var path = require('path'),
 * Find
 */
 exports.find = function(req, res) {
-  Recipe.find({}, function(errs, recipes) {
-    if (errs)
-      res.status(500).send(errs);
-    else
-      res.status(200).json(recipes);
-  });
+  Recipe.find(
+    {
+      $or: [
+        { flavour:      { $regex: req.body.searchText } },
+        { name:         { $regex: req.body.searchText } },
+        { ingredients:  { $regex: req.body.searchText } }
+      ]
+    },
+    function(errs, recipes) {
+      if (errs)
+        res.status(500).send(errs);
+      else
+        res.status(200).json(recipes);
+    });
 };
 
 /**
