@@ -2,17 +2,21 @@
   'use strict';
 
   angular
-    .module('recipes')
+    .module('recipes.listing')
     .controller('RecipesController', RecipesController);
 
-  RecipesController.$inject = ['$http', '$scope'];
+  RecipesController.$inject = ['$http', '$scope', '$state'];
 
   var buildList = function(str) {
     return str.split('\n');
   };
 
-  function RecipesController($http, $scope) {
+  function RecipesController($http, $scope, $state) {
     var vm = this;
+
+    var loadRecipeDetails = function (rowEntity) {
+      $state.go('recipes.details', { recipe: rowEntity });
+    };
 
     vm.resultsGrid = {
       data: vm.data,
@@ -20,25 +24,28 @@
       enableRowHeaderSelection: false,
       multiSelect: false,
       columnDefs: [
-        { field: 'flavour' },
         { field: 'name' },
-        { field: 'type' },
-        { field: 'calories' },
-        { field: 'ingredients' }
+        {
+          field: 'flavour',
+          width: '35%'
+        },
+        {
+          field: 'calories',
+          width: '20%'
+        }
       ]
     };
     vm.resultsGrid.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row) {
-        var msg = 'row selected ' + row.isSelected;
-        console.log(row.entity);
+        loadRecipeDetails(row.entity);
       });
     };
 
     vm.search = function () {
       $http(
         {
-          url: 'api/recipes/find',
+          url: '/api/recipes/find',
           method: 'post',
           data: {
             searchText: vm.searchText ? vm.searchText : ''

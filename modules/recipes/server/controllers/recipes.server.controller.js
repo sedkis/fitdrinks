@@ -15,9 +15,9 @@ exports.find = function(req, res) {
   Recipe.find(
     {
       $or: [
-        { flavour:      { $regex: req.body.searchText } },
-        { name:         { $regex: req.body.searchText } },
-        { ingredients:  { $regex: req.body.searchText } }
+        { flavour: { $regex: req.body.searchText } },
+        { name: { $regex: req.body.searchText } },
+        { ingredients: { $regex: req.body.searchText } }
       ]
     },
     function(errs, recipes) {

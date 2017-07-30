@@ -29,7 +29,7 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: '/modules/recipes/client/views/recipes.client.landing.html',
+        templateUrl: '/modules/recipes/client/views/recipes.listing.html',
         controller: 'RecipesController',
         controllerAs: 'vm'
       })

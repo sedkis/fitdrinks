@@ -11,12 +11,28 @@
     $stateProvider
       .state('recipes', {
         url: '/recipes',
-        templateUrl: '/modules/recipes/client/views/recipes.client.landing.html',
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('recipes.listing', {
+        url: '/listing',
+        templateUrl: '/modules/recipes/client/views/recipes.listing.html',
         controller: 'RecipesController',
         controllerAs: 'vm',
         data: {
-          roles: ['user', 'admin'],
           pageTitle: 'Recipes'
+        }
+      })
+      .state('recipes.details', {
+        url: '/details',
+        templateUrl: '/modules/recipes/client/views/recipes.details.html',
+        controller: 'RecipesDetailsController',
+        controllerAs: 'vm',
+        params: {
+          recipe: null
+        },
+        data: {
+          pageTitle: '{{ 2 + 2 }}'
         }
       });
   }

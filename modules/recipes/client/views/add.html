@@ -1,22 +1,3 @@
-<section class="container search">
-  <!---- Search for recipes ------>
-  <form name="search" style="margin-top:20px;" class="col-xs-12 col-md-offset-4 col-md-4">
-    <fieldset class="row">
-      <div class="input-group">
-        <input autocomplete="off" id="searchText" name="searchText" class="form-control"
-               ng-model="vm.searchText" placeholder="search" autofocus>
-        <span class="input-group-btn">
-          <button class="btn btn-primary" ng-click="vm.search();">Search</button>
-        </span>
-      </div>
-    </fieldset>
-  </form>
-  <!--- Results ---->
-  <div class="row col-xs-12" style="margin-top:50px;text-align:center">
-    <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
-  </div>
-</section>
-
 <section class="container new" style="margin-top:50px">
   <!---- New ------>
   <form class="col-xs-12" name="new" ng-submit="vm.insert();">
@@ -53,7 +34,7 @@
       </div>
     </div>
 
-      <span class="input-group-btn top-padding-25">
+    <span class="input-group-btn top-padding-25">
           <button class="btn btn-primary" ng-disabled="new.$invalid">Create</button>
         </span>
   </form>
