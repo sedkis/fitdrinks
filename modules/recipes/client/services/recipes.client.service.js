@@ -4,16 +4,16 @@
   // Authentication service for user variables
 
   angular
-    .module('users.services')
-    .factory('Authentication', Authentication);
+    .module('recipes')
+    .factory('RecipesService', RecipesService);
 
-  Authentication.$inject = ['$window'];
+  RecipesService.$inject = ['$window'];
 
-  function Authentication($window) {
-    var auth = {
-      user: $window.user
+  function RecipesService() {
+    var data = [];
+
+    return {
+      data: data
     };
-
-    return auth;
   }
 }());

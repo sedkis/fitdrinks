@@ -12,8 +12,8 @@
     vm.details = $state.params.recipe;
 
     $scope.$back = function() {
-      window.history.back();
-    }
+      $state.go('recipes.listing');
+    };
 
   }
 

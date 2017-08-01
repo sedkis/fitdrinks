@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-    .module('recipes.listing')
+    .module('recipes.listing', ['ui.grid', 'ui.grid.selection'])
     .controller('RecipesController', RecipesController);
 
-  RecipesController.$inject = ['$http', '$scope', '$state'];
+  RecipesController.$inject = ['$http', '$scope', '$state', 'RecipesService'];
 
   var buildList = function(str) {
     return str.split('\n');
   };
 
-  function RecipesController($http, $scope, $state) {
+  function RecipesController($http, $scope, $state, RecipesService) {
     var vm = this;
 
     var loadRecipeDetails = function (rowEntity) {
@@ -57,6 +57,7 @@
       )
       .then(function(response) {
         if (response)
+          RecipesService.data = response.data;
           vm.resultsGrid.data = response.data;
       });
     };
@@ -89,6 +90,10 @@
         }
       );
     };
+
+    if (RecipesService.data.length > 0 ) {
+      vm.resultsGrid.data = RecipesService.data;
+    }
 
   }
 
