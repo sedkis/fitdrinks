@@ -1,8 +1,7 @@
 (function () {
   'use strict';
 
-  // Authentication service for user variables
-
+  // Holds temporary Recipes Data so not lost on state switch
   angular
     .module('recipes')
     .factory('RecipesService', RecipesService);

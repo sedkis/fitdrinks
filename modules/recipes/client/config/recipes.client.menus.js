@@ -16,8 +16,12 @@
       roles: ['admin']
     });
     menuService.addSubMenuItem('topbar', 'recipes', {
-      title: 'Add Recipes',
+      title: 'Add New',
       state: 'recipes.add'
+    });
+    menuService.addSubMenuItem('topbar', 'recipes', {
+      title: 'Edit Existing',
+      state: 'recipes.edit'
     });
   }
 }());

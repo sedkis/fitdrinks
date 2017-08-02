@@ -35,6 +35,7 @@
           pageTitle: '{{ 2 + 2 }}'
         }
       })
+      // Admin routes
       .state('recipes.add', {
         url: '/add',
         templateUrl: '/modules/recipes/client/views/recipes.add.html',
@@ -42,7 +43,22 @@
         controllerAs: 'vm',
         data: {
           pageTitle: 'Add New Recipe'
-        }
+        },
+        roles: [
+          'admin'
+        ]
+      })
+      .state('recipes.edit', {
+        url: '/edit',
+        templateUrl: '/modules/recipes/client/views/recipes.edit.html',
+        controller: 'RecipesEditController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Edit existing'
+        },
+        roles: [
+          'admin'
+        ]
       });
   }
 }());
