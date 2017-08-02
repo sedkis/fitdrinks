@@ -3,3 +3,8 @@
 }
 
 
+label::after {
+	width: 50px;
+	content: ":";
+	margin-right:25px;
+}

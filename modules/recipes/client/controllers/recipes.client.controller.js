@@ -19,7 +19,7 @@
     };
 
     vm.resultsGrid = {
-      data: vm.data,
+      data: RecipesService.data,
       enableFullRowSelection: true,
       enableRowHeaderSelection: false,
       multiSelect: false,
@@ -56,9 +56,10 @@
         }
       )
       .then(function(response) {
-        if (response)
+        if (response) {
           RecipesService.data = response.data;
           vm.resultsGrid.data = response.data;
+        }
       });
     };
 
@@ -90,10 +91,6 @@
         }
       );
     };
-
-    if (RecipesService.data.length > 0 ) {
-      vm.resultsGrid.data = RecipesService.data;
-    }
 
   }
 

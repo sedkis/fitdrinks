@@ -15,9 +15,8 @@ exports.find = function(req, res) {
   Recipe.find(
     {
       $or: [
-        { flavour: { $regex: req.body.searchText } },
-        { name: { $regex: req.body.searchText } },
-        { ingredients: { $regex: req.body.searchText } }
+        { flavour: { $regex: req.body.searchText.toUpperCase() } },
+        { name: { $regex: req.body.searchText.toUpperCase() } }
       ]
     },
     function(errs, recipes) {
@@ -33,6 +32,10 @@ exports.find = function(req, res) {
  */
 exports.insert = function(req, res) {
   var recipe = new Recipe(req.body);
+
+  recipe.flavour = recipe.flavour.toUpperCase();
+  recipe.name = recipe.name.toUpperCase();
+
   recipe.save(function(err) {
     if (err) {
       return res.status(422).send({
@@ -42,4 +45,5 @@ exports.insert = function(req, res) {
       res.json(recipe);
     }
   });
+
 };

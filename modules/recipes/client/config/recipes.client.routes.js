@@ -34,6 +34,15 @@
         data: {
           pageTitle: '{{ 2 + 2 }}'
         }
+      })
+      .state('recipes.add', {
+        url: '/add',
+        templateUrl: '/modules/recipes/client/views/recipes.add.html',
+        controller: 'RecipesAddController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Add New Recipe'
+        }
       });
   }
 }());

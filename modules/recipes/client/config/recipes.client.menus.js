@@ -11,11 +11,13 @@
     // Set top bar menu items
     menuService.addMenuItem('topbar', {
       title: 'Recipes',
-      state: 'recipes.listing'
+      state: 'recipes',
+      type: 'dropdown',
+      roles: ['admin']
     });
-    menuService.addMenuItem('topbar', {
-      title: 'Details',
-      state: 'recipes.details'
+    menuService.addSubMenuItem('topbar', 'recipes', {
+      title: 'Add Recipes',
+      state: 'recipes.add'
     });
   }
 }());
