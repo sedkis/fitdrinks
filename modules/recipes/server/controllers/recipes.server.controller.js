@@ -22,10 +22,34 @@ exports.find = function(req, res) {
     function(errs, recipes) {
       if (errs)
         res.status(500).send(errs);
-      else
+      else {
+        for (var i in recipes) {
+          // Convert To This Casing
+          if (recipes[i].name) {
+            recipes[i].name = lcToStylishFont(recipes[i].name);
+          }
+          recipes[i].flavour = lcToStylishFont(recipes[i].flavour);
+        }
         res.status(200).json(recipes);
+      }
+
     });
 };
+
+var lcToStylishFont = function (lcStr) {
+  var arr = lcStr.toLowerCase().split(' ');
+  var newName= "";
+  for (var j in arr) {
+    if (j !== 0) {
+      newName += ' ';
+    }
+    newName += ucFirst(arr[j]);
+  }
+  return newName;
+}
+var ucFirst = function(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
 
 /**
  * Insert
