@@ -1,5 +1,11 @@
 .content {
   margin-top: 50px;
+  background-color: beige;
+  padding-bottom: 50px;
+}
+html *
+{
+	font-family: 'Open Sans', sans-serif;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -52,4 +58,8 @@ a:hover .header-profile-image {
 .ng-invalid {
 	border-color: red;
 	border-color: rgba(255, 0, 0, 0.63)
+}
+
+.ui-grid-contents-wrapper{
+	background-color: aliceblue;
 }
