@@ -12,7 +12,7 @@
     var Recipes = $resource(
       '/api/users', {},
       {
-        update: {
+        insert: {
           method: 'PUT'
         },
         updatePassword: {

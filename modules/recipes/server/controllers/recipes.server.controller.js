@@ -34,7 +34,10 @@ exports.insert = function(req, res) {
   var recipe = new Recipe(req.body);
 
   recipe.flavour = recipe.flavour.toUpperCase();
-  recipe.name = recipe.name.toUpperCase();
+  if (recipe.name) {
+    recipe.name = recipe.name.toUpperCase();
+  }
+
 
   recipe.save(function(err) {
     if (err) {

@@ -8,3 +8,11 @@ label::after {
 	content: ":";
 	margin-right:25px;
 }
+
+div.ingredients-div {
+	display: inline-block;
+	vertical-align: top;
+}
+div.ingredients-div p {
+	margin-bottom: 0px;
+}

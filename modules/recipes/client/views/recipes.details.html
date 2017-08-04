@@ -7,8 +7,13 @@
   <div class="col-xs-4">
     <label>Calories</label>{{ vm.details.calories }}
   </div>
-  <div class="col-xs-4">
-    <label>Ingredients</label>{{ vm.details.ingredients}}
+  <div class="col-xs-8">
+    <label>Ingredients</label>
+    <div class="ingredients-div">
+      <p ng-repeat="ingredient in vm.details.ingredients track by $index">
+        {{ingredient}}
+      </p>
+    </div>
   </div>
 </div>
 
