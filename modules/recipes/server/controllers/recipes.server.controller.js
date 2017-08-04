@@ -8,6 +8,19 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Recipe = mongoose.model('Recipe');
 
+// Helper functions
+var lcToStylishFont = function (lcStr) {
+  var arr = lcStr.split(' ');
+  var newName = '';
+  for (var j in arr) {
+    if (j !== 0) {
+      newName += ' ';
+    }
+    newName += arr[j].charAt(0).toUpperCase() + arr[j].slice(1);
+  }
+  return newName;
+};
+
 /**
 * Find
 */
@@ -15,8 +28,8 @@ exports.find = function(req, res) {
   Recipe.find(
     {
       $or: [
-        { flavour: { $regex: req.body.searchText.toUpperCase() } },
-        { name: { $regex: req.body.searchText.toUpperCase() } }
+        { flavour: { $regex: req.body.searchText.toLowerCase() } },
+        { name: { $regex: req.body.searchText.toLowerCase() } }
       ]
     },
     function(errs, recipes) {
@@ -36,32 +49,17 @@ exports.find = function(req, res) {
     });
 };
 
-var lcToStylishFont = function (lcStr) {
-  var arr = lcStr.toLowerCase().split(' ');
-  var newName= "";
-  for (var j in arr) {
-    if (j !== 0) {
-      newName += ' ';
-    }
-    newName += ucFirst(arr[j]);
-  }
-  return newName;
-}
-var ucFirst = function(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
 /**
  * Insert
  */
 exports.insert = function(req, res) {
   var recipe = new Recipe(req.body);
 
-  recipe.flavour = recipe.flavour.toUpperCase();
+  // make lower case first
+  recipe.flavour = recipe.flavour.toLowerCase();
   if (recipe.name) {
-    recipe.name = recipe.name.toUpperCase();
+    recipe.name = recipe.name.toLowerCase();
   }
-
 
   recipe.save(function(err) {
     if (err) {
@@ -69,6 +67,7 @@ exports.insert = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      recipe.name = lcToStylishFont(recipe.name);
       res.json(recipe);
     }
   });

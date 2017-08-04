@@ -1,36 +1,38 @@
-<section class="container new" style="margin-top:50px">
+<section class="container new">
+  <div class="page-header">
+    <h1>Create New</h1>
+  </div>
+
   <!---- New ------>
   <form class="col-xs-12" name="new" ng-submit="vm.insert();">
-
-    <h2>Create new...</h2>
 
     <div class="row">
       <div class="col-xs-4">
         <label>Flavour</label>
         <input autocomplete="off" id="flavour" name="flavour" class="form-control"
-               ng-model="form.flavour" placeholder="protein flavour" autofocus required="true">
+               ng-model="form.flavour" autofocus required="true">
       </div>
       <div class="col-xs-4">
         <label>Name</label>
         <input autocomplete="off" id="description" name="description" class="form-control"
-               ng-model="form.name" placeholder="(Optional)" autofocus>
+               ng-model="form.name" required="true">
       </div>
       <div class="col-xs-4">
         <label>Type</label>
         <input autocomplete="off" id="type" name="type" class="form-control"
-               ng-model="form.type" placeholder="(Optional)" autofocus>
+               ng-model="form.type">
       </div>
     </div>
     <div class="row top-margin-25">
       <div class="col-xs-4">
         <label>Calories</label>
         <input autocomplete="off" id="calories" name="calories" class="form-control"
-               ng-model="form.calories" placeholder="(Optional)" autofocus>
+               ng-model="form.calories">
       </div>
       <div class="col-xs-8">
         <label>Ingredients</label>(Separate by comma)
         <input autocomplete="off" id="ingredients" name="ingredients" class="form-control"
-               ng-model="form.ingredients" placeholder="(Optional)" autofocus>
+               ng-model="form.ingredients">
       </div>
     </div>
 

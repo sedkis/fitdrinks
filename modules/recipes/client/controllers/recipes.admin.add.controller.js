@@ -2,19 +2,17 @@
   'use strict';
 
   angular
-    .module('recipes.admin', ['ui.grid', 'ui.grid.selection'])
+    .module('recipes.admin', ['ui.grid', 'ui.grid.selection', 'ui-notification'])
     .controller('RecipesAddController', RecipesAddController);
 
-  RecipesAddController.$inject = ['$http', '$scope', '$state', 'RecipesResource'];
+  RecipesAddController.$inject = ['$http', '$scope', '$state', 'RecipesResource', 'Notification'];
 
   var buildList = function(str) {
-    return str.split(',');
+    return str ? str.split(',') : null;
   };
 
-  function RecipesAddController($http, $scope, $state, RecipesResource) {
+  function RecipesAddController($http, $scope, $state, RecipesResource, Notification) {
     var vm = this;
-
-
 
     vm.insert = function () {
       var data = {
@@ -38,10 +36,10 @@
         function(response) {
           if (response)
             $scope.form = {};
-          alert("Successfully added: response");
+          Notification.success('Successfully added: ' + response.data.name);
         },
         function(error) {
-          console.log(error);
+          Notification.error(error);
         }
       );
     };
