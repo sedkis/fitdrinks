@@ -1,8 +1,8 @@
-(function() {
+ (function() {
   'use strict';
 
   angular
-    .module('recipes.admin', ['ui.grid', 'ui.grid.selection', 'ui-notification'])
+    .module('recipes.admin', ['ui-notification'])
     .controller('RecipesAddController', RecipesAddController);
 
   RecipesAddController.$inject = ['$http', '$scope', '$state', 'RecipesResource', 'Notification'];
@@ -11,7 +11,7 @@
     return str ? str.split(',') : null;
   };
 
-  function RecipesAddController($http, $scope, $state, RecipesResource, Notification) {
+  function RecipesAddController($http, $scope, Notification) {
     var vm = this;
 
     vm.insert = function () {

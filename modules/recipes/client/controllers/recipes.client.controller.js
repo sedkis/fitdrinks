@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('recipes.listing', ['ui.grid', 'ui.grid.selection'])
+    .module('recipes.listing', [])
     .controller('RecipesController', RecipesController);
 
   RecipesController.$inject = ['$http', '$scope', '$state', 'RecipesService'];

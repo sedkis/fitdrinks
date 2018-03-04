@@ -25,6 +25,7 @@ var lcToStylishFont = function (lcStr) {
 * Find
 */
 exports.find = function(req, res) {
+  console.log(req.body);
   Recipe.find(
     {
       $or: [
@@ -33,9 +34,11 @@ exports.find = function(req, res) {
       ]
     },
     function(errs, recipes) {
-      if (errs)
+      if (errs) {
         res.status(500).send(errs);
-      else {
+        console.log(errs);
+      } else {
+        console.log(recipes);
         for (var i in recipes) {
           // Convert To This Casing
           if (recipes[i].name) {
