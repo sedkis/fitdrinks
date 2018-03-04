@@ -10,4 +10,5 @@ module.exports = function(app) {
   // Setting up the Recipes API
   app.route('/api/recipes/find').post(recipes.find);
   app.route('/api/recipes/new').post(recipes.insert);
+  app.route('/api/recipes/seed').get(recipes.seed);
 };

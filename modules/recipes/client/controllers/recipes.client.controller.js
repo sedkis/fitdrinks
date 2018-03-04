@@ -63,6 +63,22 @@
       });
     };
 
+    vm.seed = function () {
+      $http(
+        {
+          url: '/api/recipes/seed',
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(function(response) {
+        if (response) {
+          console.log(response);
+        }
+      });
+    };
+
     vm.insert = function () {
       var data = {
         flavour: vm.flavour,

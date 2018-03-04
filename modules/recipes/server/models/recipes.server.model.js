@@ -4,13 +4,7 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
-  path = require('path'),
-  Schema = mongoose.Schema,
-  validator = require('validator');
-
-var validateLocalStrategyCalories = function(calories) {
-  return validator.isNumeric(calories);
-};
+  Schema = mongoose.Schema;
 
 /**
  * Recipe Schema
@@ -18,8 +12,7 @@ var validateLocalStrategyCalories = function(calories) {
 var RecipeSchema = new Schema({
   flavour: {
     type: String,
-    trim: true,
-    required: 'Please fill in protein flavour'
+    trim: true
   },
   name: {
     type: String,
@@ -30,15 +23,9 @@ var RecipeSchema = new Schema({
     trim: true,
     default: ['']
   },
-  calories: {
+  nutritional: {
     type: String,
-    trim: true,
-    validate: [validateLocalStrategyCalories, 'Please choose correct number of calories']
-  },
-  type: {
-    type: String,
-    trim: true,
-    default: ''
+    trim: true
   },
   created: {
     type: Date,
