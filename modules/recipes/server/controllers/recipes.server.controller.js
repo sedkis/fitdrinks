@@ -11,6 +11,9 @@ var path = require('path'),
 
 // Helper functions
 var lcToStylishFont = function (lcStr) {
+  if(!lcStr)
+    console.log(lcStr);
+
   var arr = lcStr.split(' ');
   var newName = '';
   for (var j in arr) {
@@ -26,11 +29,16 @@ var lcToStylishFont = function (lcStr) {
 * Find
 */
 exports.find = function(req, res) {
-  console.log(req.body);
+
+  if (!req.body.searchText)
+    res.status(400).json({
+      error: 'Enter search criteria'
+    });
+
   Recipe.find(
     {
       $or: [
-        { flavour: { $regex: req.body.searchText.toLowerCase() } },
+        // { flavour: { $regex: req.body.searchText.toLowerCase() } },
         { name: { $regex: req.body.searchText.toLowerCase() } }
       ]
     },
@@ -42,10 +50,10 @@ exports.find = function(req, res) {
         console.log(recipes);
         for (var i in recipes) {
           // Convert To This Casing
-          if (recipes[i].name) {
+          if (recipes[i].name)
             recipes[i].name = lcToStylishFont(recipes[i].name);
-          }
-          recipes[i].flavour = lcToStylishFont(recipes[i].flavour);
+          if (recipes[i].flavour)
+            recipes[i].flavour = lcToStylishFont(recipes[i].flavour);
         }
         res.status(200).json(recipes);
       }

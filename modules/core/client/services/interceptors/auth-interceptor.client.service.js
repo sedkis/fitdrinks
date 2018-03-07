@@ -17,9 +17,9 @@
     function responseError(rejection) {
       if (!rejection.config.ignoreAuthModule) {
         switch (rejection.status) {
-          case 400:
-            $injector.get('$state').go('bad-request', { message: rejection.data.message });
-            break;
+          // case 400:
+          //   $injector.get('$state').go('bad-request', { message: rejection.data.message });
+          //   break;
           case 401:
             // Deauthenticate the global user
             Authentication.user = null;

@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-    .module('recipes.listing', [])
+    .module('recipes.listing', ['ui.grid'])
     .controller('RecipesController', RecipesController);
 
-  RecipesController.$inject = ['$http', '$scope', '$state', 'RecipesService'];
+  RecipesController.$inject = ['$http', '$scope', '$state', 'RecipesService', 'Notification'];
 
   var buildList = function(str) {
     return str.split('\n');
   };
 
-  function RecipesController($http, $scope, $state, RecipesService) {
+  function RecipesController($http, $scope, $state, RecipesService, Notification) {
     var vm = this;
 
     var loadRecipeDetails = function (rowEntity) {
@@ -30,7 +30,7 @@
           width: '35%'
         },
         {
-          field: 'calories',
+          field: 'nutritional',
           width: '20%'
         }
       ]
@@ -60,6 +60,9 @@
           RecipesService.data = response.data;
           vm.resultsGrid.data = response.data;
         }
+      }, function(err) {
+        Notification.error('Enter Search Criteria');
+        console.log(err);
       });
     };
 
