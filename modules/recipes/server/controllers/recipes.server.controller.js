@@ -20,9 +20,9 @@ var path = require('path'),
  */
 exports.find = function(req, res) {
   if (!req.body.searchText)
-    return res.status(400).json({error: 'Enter search criteria'});
+    return res.status(400).json({ error: 'Enter search criteria' });
 
-  console.log("query: " + req.body.searchText);
+  console.log('query: ' + req.body.searchText);
   // TODO:
   // needs a more optimized query.  this is an expensive search that runs
   // two regex against two fields
