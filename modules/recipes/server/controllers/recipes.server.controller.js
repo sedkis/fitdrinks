@@ -97,7 +97,7 @@ exports.seed = function(req, res) {
       var recipe = new Recipe();
       recipe.flavour = row.flavour;
       recipe.name = row.name;
-      recipe.ingredients = row.ingredients;
+      recipe.ingredients = row.ingredients.split("\r\n");
       recipe.nutritional = row.nutritional;
 
       recipe.save(function(error, data) {

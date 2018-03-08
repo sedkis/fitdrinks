@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('recipes.listing', ['ui.grid'])
+    .module('recipes.listing', ['ui.grid', 'ui.grid.selection'])
     .controller('RecipesController', RecipesController);
 
   RecipesController.$inject = ['$http', '$scope', '$state', 'RecipesService', 'Notification'];
@@ -22,6 +22,7 @@
       data: RecipesService.data,
       enableFullRowSelection: true,
       enableRowHeaderSelection: false,
+      enableRowSelection: true,
       multiSelect: false,
       columnDefs: [
         { field: 'name' },
