@@ -4,17 +4,18 @@
   "homepage": "http://meanjs.org/",
   "license": "MIT",
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-animate": "~1.5.0",
+    "angular": "~1.6.9",
+    "angular-animate": "~1.6.9",
     "angular-bootstrap": "~1.2.1",
-    "angular-messages": "~1.5.0",
-    "angular-mocks": "~1.5.0",
-    "angular-resource": "~1.5.0",
+    "angular-messages": "~1.6.9",
+    "angular-mocks": "~1.6.9",
+    "angular-resource": "~1.6.9",
     "angular-ui-notification": "~0.2.0",
     "angular-ui-router": "~0.2.18",
     "bootstrap": "~3.3.6",
     "ng-file-upload": "~12.1.0",
-    "owasp-password-strength-test": "~1.3.0"
+    "owasp-password-strength-test": "~1.3.0",
+    "angular-ui-grid": "^4.2.4"
   },
   "overrides": {
     "bootstrap": {
