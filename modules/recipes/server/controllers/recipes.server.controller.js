@@ -9,37 +9,28 @@ var path = require('path'),
   XLSX = require('xlsx'),
   Recipe = mongoose.model('Recipe');
 
-// Helper functions
-var lcToStylishFont = function (lcStr) {
-  if(!lcStr)
-    console.log(lcStr);
-
-  var arr = lcStr.split(' ');
-  var newName = '';
-  for (var j in arr) {
-    if (j !== 0) {
-      newName += ' ';
-    }
-    newName += arr[j].charAt(0).toUpperCase() + arr[j].slice(1);
-  }
-  return newName;
-};
-
 /**
-* Find
-*/
+ * Returns all documents matching the search parameters
+ *
+ * TODO: Change Recipe Models into DTOs
+ * TODO: Put repository methods in a repository class
+ *
+ * @param req request object.  Does not accept blank search.  Throws a 400 error
+ * @param res returns all matching Recipe models.
+ */
 exports.find = function(req, res) {
-
   if (!req.body.searchText)
-    res.status(400).json({
-      error: 'Enter search criteria'
-    });
+    return res.status(400).json({error: 'Enter search criteria'});
 
+  console.log("query: " + req.body.searchText);
+  // TODO:
+  // needs a more optimized query.  this is an expensive search that runs
+  // two regex against two fields
   Recipe.find(
     {
       $or: [
-        // { flavour: { $regex: req.body.searchText.toLowerCase() } },
-        { name: { $regex: req.body.searchText.toLowerCase() } }
+        { flavour: new RegExp(req.body.searchText, 'i') },
+        { name: new RegExp(req.body.searchText, 'i') }
       ]
     },
     function(errs, recipes) {
@@ -47,31 +38,24 @@ exports.find = function(req, res) {
         res.status(500).send(errs);
         console.log(errs);
       } else {
-        console.log(recipes);
-        for (var i in recipes) {
-          // Convert To This Casing
-          if (recipes[i].name)
-            recipes[i].name = lcToStylishFont(recipes[i].name);
-          if (recipes[i].flavour)
-            recipes[i].flavour = lcToStylishFont(recipes[i].flavour);
-        }
+        console.log('recipes: ' + recipes);
         res.status(200).json(recipes);
       }
-
     });
 };
 
 /**
- * Insert
+ * Inserts a recipe document into the Recipe collection.
+ *
+ * TODO: Send this to a "pending" table, which is approved by a "manager"
+ * TODO:
+ *
+ * @param req contains the recipe information
+ * @param res response object
+ * @return res returns the newly inserted document model
  */
 exports.insert = function(req, res) {
   var recipe = new Recipe(req.body);
-
-  // make lower case first
-  recipe.flavour = recipe.flavour.toLowerCase();
-  if (recipe.name) {
-    recipe.name = recipe.name.toLowerCase();
-  }
 
   recipe.save(function(err) {
     if (err) {
@@ -79,13 +63,22 @@ exports.insert = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      recipe.name = lcToStylishFont(recipe.name);
       res.json(recipe);
     }
   });
 
 };
 
+/**
+ * Upon being seeded, the database will destroy all current documents in the 'Recipe' collection
+ * and re-initialize it with documents from the on server .xlsx
+ *
+ * TODO: add Admin only privileges
+ *
+ * @param req we don't actually use this.  in the future, can extract admin info from it
+ * @param res
+ * @return res information on number of rows that were looked at, added it, and errors.
+ */
 exports.seed = function(req, res) {
   console.log('attempting to seed collection...');
   var worksheet = XLSX.readFile('./recipes_database.xlsx').Sheets.Sheet1;
