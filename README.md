@@ -1,5 +1,11 @@
-This repo was forked off (http://meanjs.org/):
+MongoDB with Mongoose
+NodeJs
+Express
+AngularJs (1.6.x)
 
-Just a little MEAN app to play with.  App supports users OOTB. 
+Functionality:
+Insert / Search for Recipes
+Use UI Grid to display information
+Seed database using .xlsx server file
 
- 
+This repo was forked off (http://meanjs.org/): 
