@@ -1,4 +1,5 @@
-<section class="container search">
+<section class="container search recipes-container">
+
   <!---- Search for recipes ------>
   <h2>Find a delicious protein shake!</h2>
 
@@ -18,9 +19,10 @@
     </fieldset>
   </form>
 
+  <!--
   <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
   <!--- Results ---->
-  <div class="row col-xs-12" style="margin-top:50px;text-align:center">
+  <div ng-if="vm.resultsGrid.data.length > 0" class="row col-xs-12" style="margin-top:50px;text-align:center">
     <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
   </div>
 </section>

@@ -2,7 +2,29 @@
 	cursor: pointer;
 }
 
+.ui-grid-contents-wrapper{
+	background-crolor: aliceblue;
+	opacity: 0.8;
+}
+.ui-grid-contents-wrapper:hover{
+	opacity: 1;
+}
+.ui-grid-row:hover .ui-grid-cell {
+	background-color: beige;
+}
 
+html, body, section.content, section.container, section.ng-scope, .recipes-container {
+	min-height: 500px;
+}
+body {
+	background-color: transparent;
+}
+.recipes-container {
+	background: url("background_smoothie.jpeg");
+	background-size: 1100px;
+	background-repeat: no-repeat;
+	background-position:top;
+}
 label::after {
 	width: 50px;
 	content: ":";
