@@ -4,7 +4,9 @@
  * Module dependencies
  */
 var path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  errorHandler = require(path.resolve(
+    './modules/core/server/controllers/errors.server.controller'
+  )),
   mongoose = require('mongoose'),
   XLSX = require('xlsx'),
   Recipe = mongoose.model('Recipe');
@@ -41,7 +43,8 @@ exports.find = function(req, res) {
         console.log('recipes: ' + recipes);
         res.status(200).json(recipes);
       }
-    });
+    }
+  );
 };
 
 /**
@@ -66,7 +69,6 @@ exports.insert = function(req, res) {
       res.json(recipe);
     }
   });
-
 };
 
 /**
@@ -97,7 +99,7 @@ exports.seed = function(req, res) {
       var recipe = new Recipe();
       recipe.flavour = row.flavour;
       recipe.name = row.name;
-      recipe.ingredients = row.ingredients.split("\r\n");
+      recipe.ingredients = row.ingredients.split('\r\n');
       recipe.nutritional = row.nutritional;
 
       recipe.save(function(error, data) {
@@ -107,15 +109,20 @@ exports.seed = function(req, res) {
         } else {
           processedCount++;
         }
-
       });
     } catch (e) {
       console.log('Error while seeding row: ' + row + '\n' + e);
     }
-
   });
 
-  console.log('Seed completed, total rows: ' + rowCount + '\nrows processed: ' + processedCount + '\nnum errors: ' + errorCount);
+  console.log(
+    'Seed completed, total rows: ' +
+      rowCount +
+      '\nrows processed: ' +
+      processedCount +
+      '\nnum errors: ' +
+      errorCount
+  );
   res.status(200).json({
     totalRows: rowCount,
     processed: processedCount,
