@@ -30,17 +30,7 @@
       $state.go('recipes.details', { recipe: rowEntity });
     };
 
-    vm.resultsGrid = {
-      data: RecipesService.data,
-      enableFullRowSelection: true,
-      enableRowHeaderSelection: false,
-      enableRowSelection: true,
-      multiSelect: false,
-      columnDefs: [
-        { field: 'name' },
-        { field: 'flavour' }
-      ]
-    };
+    vm.resultsGrid = { data: RecipesService.data, enableFullRowSelection: true, enableRowHeaderSelection: false, enableRowSelection: true, multiSelect: false, columnDefs: [{ field: "name" }, { field: "flavour" }] };
     vm.resultsGrid.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row) {
