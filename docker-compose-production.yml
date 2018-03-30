@@ -7,7 +7,7 @@ services:
      dockerfile: Dockerfile-production
     container_name: meanjs
     ports:
-     - "8443:8443"
+     - "80:8443"
     environment:
      - NODE_ENV=production
      - DB_1_PORT_27017_TCP_ADDR=db
