@@ -38,14 +38,7 @@
       multiSelect: false,
       columnDefs: [
         { field: 'name' },
-        {
-          field: 'flavour',
-          width: '35%'
-        },
-        {
-          field: 'nutritional',
-          width: '20%'
-        }
+        { field: 'flavour' }
       ]
     };
     vm.resultsGrid.onRegisterApi = function(gridApi) {
