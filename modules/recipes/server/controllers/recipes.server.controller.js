@@ -24,7 +24,7 @@ exports.find = function(req, res) {
   if (!req.body.searchText)
     return res.status(400).json({ error: 'Enter search criteria' });
 
-  console.log('query: ' + req.body.searchText);
+  console.log(new Date() + " query: " + req.body.searchText);
   // TODO:
   // needs a more optimized query.  this is an expensive search that runs
   // two regex against two fields
@@ -40,7 +40,7 @@ exports.find = function(req, res) {
         res.status(500).send(errs);
         console.log(errs);
       } else {
-        console.log('recipes: ' + recipes);
+        console.log("recipes found: " + recipes.length);
         res.status(200).json(recipes);
       }
     }
