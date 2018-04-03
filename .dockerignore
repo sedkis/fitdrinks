@@ -2,3 +2,9 @@ node_modules
 bower_components
 .tmp
 .env
+Dockerfile
+Dockerfile-production
+docker-compose.yml
+docker-compose-production.yml
+public
+.idea
