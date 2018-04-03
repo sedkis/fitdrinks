@@ -101,14 +101,8 @@
       );
     };
 
-    vm.searchOptions = [
-      {value:"ingredients", name:"Ingredients", checked:true},
-      {value:"name", name:"Name", checked:true}
-    ];
+    vm.searchOptions = [{ value: "ingredients", name: "Ingredients", checked: true }, { value: "name", name: "Name", checked: true }];
 
-    vm.filterKeywords = [
-      {value:"lowCal", name:"Low Cal"},
-      {value:"highProtein", name:"High Protein"}
-    ]
+    vm.filterKeywords = [{ value: "lowCal", name: "Low Cal" }, { value: "highProtein", name: "High Protein" }];
   }
 })();
