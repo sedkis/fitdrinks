@@ -30,13 +30,49 @@
       $state.go('recipes.details', { recipe: rowEntity });
     };
 
-    vm.resultsGrid = { data: RecipesService.data, enableFullRowSelection: true, enableRowHeaderSelection: false, enableRowSelection: true, multiSelect: false, columnDefs: [{ field: "name" }, { field: "flavour" }] };
+    vm.resultsGrid = { 
+      data: RecipesService.data, 
+      enableFullRowSelection: true, 
+      enableRowHeaderSelection: false, 
+      enableRowSelection: true, 
+      multiSelect: false, 
+      columnDefs: [
+        { field: "name", visible: true }, 
+        { field: "flavour", visible: true },
+        { field: "calories", visible: false },
+        { 
+          field: "null",
+          name: "null",
+          cellTemplate: "<div> > </div>",
+          width: "5%"
+        }
+      ] 
+    };
+
     vm.resultsGrid.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row) {
         loadRecipeDetails(row.entity);
       });
     };
+  
+    vm.toggleVisibleRow = function(columnName){
+      vm.resultsGrid.columnDefs[vm.columnMap[columnName].index].visible = vm.columnMap[columnName].visibility; 
+      $scope.gridApi.core.refresh();
+    }
+
+    var columnMapIndex = function(name, index, visibility) {
+      return {
+        name: name,
+        index: index,
+        visibility: visibility
+      };
+    }
+    vm.columnMap = {
+      name: new columnMapIndex("name", 0, true),
+      flavour: new columnMapIndex("flavour", 1, true),
+      calories: new columnMapIndex("calories", 2, false),
+    }
 
     vm.search = function() {
       $http({
@@ -101,8 +137,15 @@
       );
     };
 
-    vm.searchOptions = [{ value: "ingredients", name: "Ingredients", checked: true }, { value: "name", name: "Name", checked: true }];
+    vm.searchOptions = [
+      {value:"ingredients", name:"Ingredients", checked:true},
+      {value:"name", name:"Name", checked:true}
+    ];
 
-    vm.filterKeywords = [{ value: "lowCal", name: "Low Cal" }, { value: "highProtein", name: "High Protein" }];
+    vm.filterKeywords = [
+      {value:"lowCal", name:"Low Cal"},
+      {value:"highProtein", name:"High Protein"}
+    ]
+    
   }
 })();

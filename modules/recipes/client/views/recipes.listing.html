@@ -5,12 +5,14 @@
 
   <p>Find a delicious protein shake!</p>
 
-  Search by: 
-  <label ng-repeat="option in vm.searchOptions">
-    <input type="checkbox" ng-model="option.checked"/> {{option.name}}
-  </label>
+  <div class="col-xs-12">
+    Search by: 
+    <label ng-repeat="option in vm.searchOptions">
+      <input type="checkbox" ng-model="option.checked"/> {{option.name}}
+    </label>
+  </div>
 
-  <form name="search" style="margin-top:20px;" class="col-xs-12 col-md-offset-4 col-md-4">
+  <form name="search" style="margin-top:20px;" class="col-xs-12">
     <fieldset class="row">
       <div class="input-group">
         <input autocomplete="off" id="searchText" name="searchText" class="form-control"
@@ -22,21 +24,28 @@
     </fieldset>
   </form>
 
-  <div>
+  <div class="col-xs-12">
     Or Select a filter:
+    <form>
+      <select ng-model="vm.selectedFilter">
+        <option ng-repeat="option in vm.filterKeywords" value="{{option.value}}">{{ option.name }}</option>
+      </select>
+    </form>
   </div>
-  <form>
-    <label ng-repeat="option in vm.filterKeywords">
-      <input type="radio" ng-model="vm.selectedFilter" value=red/> {{option.name}}
-    </label>
-  </form>
-  selected: {{vm.selectedFilter}}
+
 
   <!--
   <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
   <!--- Results ---->
   <div ng-if="vm.resultsGrid.data.length > 0" class="row col-xs-12" style="margin-top:50px;text-align:center">
-    <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
+    Show columns
+    <input type="checkbox" ng-model="vm.columnMap.name.visibility" ng-change="vm.toggleVisibleRow('name')"> <b>name</b>
+    <input type="checkbox" ng-model="vm.columnMap.flavour.visibility" ng-change="vm.toggleVisibleRow('flavour')"> <b>flavour</b>
+    <input type="checkbox" ng-model="vm.columnMap.calories.visibility" ng-change="vm.toggleVisibleRow('calories')"> <b>calories</b>
+    
+    <div class=row>
+      <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
+    </div>
   </div>
 
   

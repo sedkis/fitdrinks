@@ -19,12 +19,12 @@ html, body, section.content, section.container, section.ng-scope, .recipes-conta
 body {
 	background-color: transparent;
 }
-.recipes-container {
+/* .recipes-container {
 	background: url("background_smoothie.jpeg");
 	background-size: 1100px;
 	background-repeat: no-repeat;
 	background-position:top;
-}
+} */
 label::after {
 	width: 50px;
 	content: ":";
