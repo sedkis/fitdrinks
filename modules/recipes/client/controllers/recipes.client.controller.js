@@ -37,18 +37,20 @@
       enableRowSelection: true, 
       multiSelect: false, 
       columnDefs: [
-        { field: "name", visible: true }, 
-        { field: "flavour", visible: true },
-        { field: "calories", visible: false },
+        { field: "name",          name: "Name",         visible: true, width: '40%' },
+        { field: "calories",      name: "Calories",     visible: true },
+        { field: "proteinGrams",  name:'Protein (g)',   visible: true },
+        { field: "carbsGrams",    name: 'Carbs (g)',    visible: true },
+        { field: "fatGrams",      name: 'Fat (g)',      visible: true },
         { 
           field: "null",
-          name: "null",
+          name: " ",
           cellTemplate: "<div> > </div>",
-          width: "5%"
+          width: "5%",
+          enableColumnMenu: false
         }
       ] 
     };
-
     vm.resultsGrid.onRegisterApi = function(gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function(row) {
@@ -57,11 +59,12 @@
     };
   
     vm.toggleVisibleRow = function(columnName){
-      vm.resultsGrid.columnDefs[vm.columnMap[columnName].index].visible = vm.columnMap[columnName].visibility; 
+      var index = vm.columnMap[columnName].index;
+      vm.resultsGrid.columnDefs[index].visible = vm.columnMap[columnName].visibility; 
       $scope.gridApi.core.refresh();
     }
 
-    var columnMapIndex = function(name, index, visibility) {
+    function columnMapIndex(name, index, visibility) {
       return {
         name: name,
         index: index,
@@ -70,8 +73,8 @@
     }
     vm.columnMap = {
       name: new columnMapIndex("name", 0, true),
-      flavour: new columnMapIndex("flavour", 1, true),
-      calories: new columnMapIndex("calories", 2, false),
+      calories: new columnMapIndex("calories", 1, true),
+      protein: new columnMapIndex("calories", 1, true),
     }
 
     vm.search = function() {

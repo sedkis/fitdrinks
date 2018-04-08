@@ -37,10 +37,10 @@
   <!--
   <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
   <!--- Results ---->
-  <div ng-if="vm.resultsGrid.data.length > 0" class="row col-xs-12" style="margin-top:50px;text-align:center">
+  <!-- FOR TESTING REMOVE -->
+  <div  class="row col-xs-12" style="margin-top:50px;text-align:center">
     Show columns
     <input type="checkbox" ng-model="vm.columnMap.name.visibility" ng-change="vm.toggleVisibleRow('name')"> <b>name</b>
-    <input type="checkbox" ng-model="vm.columnMap.flavour.visibility" ng-change="vm.toggleVisibleRow('flavour')"> <b>flavour</b>
     <input type="checkbox" ng-model="vm.columnMap.calories.visibility" ng-change="vm.toggleVisibleRow('calories')"> <b>calories</b>
     
     <div class=row>
