@@ -39,7 +39,7 @@
       columnDefs: [
         { field: "name",          name: "Name",         visible: true, width: '40%' },
         { field: "calories",      name: "Calories",     visible: true },
-        { field: "proteinGrams",  name:'Protein (g)',   visible: true },
+        { field: "proteinGrams",  name: 'Protein (g)',  visible: true },
         { field: "carbsGrams",    name: 'Carbs (g)',    visible: true },
         { field: "fatGrams",      name: 'Fat (g)',      visible: true },
         { 
@@ -59,8 +59,8 @@
     };
   
     vm.toggleVisibleRow = function(columnName){
-      var index = vm.columnMap[columnName].index;
-      vm.resultsGrid.columnDefs[index].visible = vm.columnMap[columnName].visibility; 
+      var indexes = vm.columnMap[columnName].index;
+      indexes.forEach(index => vm.resultsGrid.columnDefs[index].visible = vm.columnMap[columnName].visibility);
       $scope.gridApi.core.refresh();
     }
 
@@ -72,9 +72,9 @@
       };
     }
     vm.columnMap = {
-      name: new columnMapIndex("name", 0, true),
-      calories: new columnMapIndex("calories", 1, true),
-      protein: new columnMapIndex("calories", 1, true),
+      name: new columnMapIndex("name", [0], true),
+      calories: new columnMapIndex("calories", [1], true),
+      macros: new columnMapIndex("macros", [2,3,4], true),
     }
 
     vm.search = function() {
@@ -88,13 +88,13 @@
           'Content-Type': 'application/json'
         }
       }).then(
-        function(response) {
+        response => {
           if (response) {
             RecipesService.data = response.data;
             vm.resultsGrid.data = response.data;
           }
         },
-        function(err) {
+        err => {
           Notification.error('Enter Search Criteria');
           console.log(err);
         }

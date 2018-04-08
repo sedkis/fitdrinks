@@ -2,10 +2,9 @@
 
   <!---- Search for recipes ------>
   <h2>Bored with your current shake?</h2>
-
   <p>Find a delicious protein shake!</p>
 
-  <div class="col-xs-12">
+  <div class="row col-xs-12">
     Search by: 
     <label ng-repeat="option in vm.searchOptions">
       <input type="checkbox" ng-model="option.checked"/> {{option.name}}
@@ -24,7 +23,7 @@
     </fieldset>
   </form>
 
-  <div class="col-xs-12">
+  <div class="row col-xs-12">
     Or Select a filter:
     <form>
       <select ng-model="vm.selectedFilter">
@@ -33,21 +32,20 @@
     </form>
   </div>
 
-
-  <!--
-  <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
   <!--- Results ---->
-  <!-- FOR TESTING REMOVE -->
   <div  class="row col-xs-12" style="margin-top:50px;text-align:center">
     Show columns
     <input type="checkbox" ng-model="vm.columnMap.name.visibility" ng-change="vm.toggleVisibleRow('name')"> <b>name</b>
     <input type="checkbox" ng-model="vm.columnMap.calories.visibility" ng-change="vm.toggleVisibleRow('calories')"> <b>calories</b>
-    
+    <input type="checkbox" ng-model="vm.columnMap.macros.visibility" ng-change="vm.toggleVisibleRow('macros')"> <b>macronutritients</b>
+
     <div class=row>
       <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
     </div>
   </div>
 
+<!--
+  <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
   
 
 
