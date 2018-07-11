@@ -23,8 +23,20 @@ var RecipeSchema = new Schema({
     trim: true,
     default: ['']
   },
-  nutritional: {
-    type: String,
+  calories: {
+    type: Number,
+    trim: true
+  },
+  protein: {
+    type: Number,
+    trim: true
+  },
+  fat: {
+    type: Number,
+    trim: true
+  },
+  carbs: {
+    type: Number,
     trim: true
   },
   created: {

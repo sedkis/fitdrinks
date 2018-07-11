@@ -27,7 +27,7 @@ body {
 } */
 label::after {
 	width: 50px;
-	content: ":";
+	/* content: ":"; */
 	margin-right:25px;
 }
 

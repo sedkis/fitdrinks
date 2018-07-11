@@ -21,26 +21,40 @@ var path = require('path'),
  * @param res returns all matching Recipe models.
  */
 exports.find = function(req, res) {
-  if (!req.body.searchText)
+  if (!req.body.searchText && !req.body.searchOptions)
     return res.status(400).json({ error: 'Enter search criteria' });
-
-  console.log(new Date() + " query: " + req.body.searchText);
-  // TODO:
+  // TODO
   // needs a more optimized query.  this is an expensive search that runs
   // two regex against two fields
-  Recipe.find(
-    {
-      $or: [
-        { flavour: new RegExp(req.body.searchText, 'i') },
-        { name: new RegExp(req.body.searchText, 'i') }
-      ]
-    },
+  var searchQueryObject = {
+    $or: [
+      { ingredients: new RegExp(req.body.searchText, 'i') },
+      { name: new RegExp(req.body.searchText, 'i') }
+    ]
+  };
+
+  if (req.body.searchOptions) {
+    searchQueryObject.$and = [{ calories: { $ne: '0' } }];
+
+    if (req.body.searchOptions.lowCal)
+      searchQueryObject.$and.push({ calories: { $lt: '200' } });
+    if (req.body.searchOptions.lowCarb)
+      searchQueryObject.$and.push({ carbs: { $lt: '20' } });
+    if (req.body.searchOptions.highProtein)
+      searchQueryObject.$and.push({ protein: { $gte: '20' } });
+    if (req.body.searchOptions.highFat)
+      searchQueryObject.$and.push({ fat: { $gte: '20' } });
+    if (req.body.searchOptions.lowFat)
+      searchQueryObject.$and.push({ fat: { $lt: '20' } });
+  }
+
+  Recipe.find(searchQueryObject,
     function(errs, recipes) {
       if (errs) {
-        res.status(500).send(errs);
+        res.status(500).send('internal error');
         console.log(errs);
       } else {
-        console.log("recipes found: " + recipes.length);
+        console.log('recipes found: ' + recipes.length);
         res.status(200).json(recipes);
       }
     }
@@ -83,12 +97,13 @@ exports.insert = function(req, res) {
  */
 exports.seed = function(req, res) {
   console.log('attempting to seed collection...');
-  var worksheet = XLSX.readFile('./recipes_database.xlsx').Sheets.Sheet1;
+  var workbook = XLSX.readFile('./recipes.xlsx').Sheets;
+  var worksheet = workbook.All;
   var worksheetArray = XLSX.utils.sheet_to_json(worksheet);
 
   var Recipe = mongoose.model('Recipe');
   Recipe.remove({}).exec(); // Clears all entries
-  console.log('Wiped collection...');
+  console.log('Wiped collection....');
 
   var rowCount = 0,
     processedCount = 0,
@@ -97,10 +112,12 @@ exports.seed = function(req, res) {
     rowCount++;
     try {
       var recipe = new Recipe();
-      recipe.flavour = row.flavour;
       recipe.name = row.name;
-      recipe.ingredients = row.ingredients.split('\r\n');
-      recipe.nutritional = row.nutritional;
+      recipe.ingredients = row.ingredients.split(',');
+      recipe.fat = row.fat || 0;
+      recipe.protein = row.protein || 0;
+      recipe.carbs = row.carbs || 0;
+      recipe.calories = (recipe.fat * 9) + (recipe.protein * 4) + (recipe.carbs * 4);
 
       recipe.save(function(error, data) {
         if (error) {
@@ -111,7 +128,7 @@ exports.seed = function(req, res) {
         }
       });
     } catch (e) {
-      console.log('Error while seeding row: ' + row + '\n' + e);
+      console.log('Error while seeding row: '); console.log(row); console.log('\n' + e);
     }
   });
 

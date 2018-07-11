@@ -2,35 +2,38 @@
 
   <!---- Search for recipes ------>
   <h2>Bored with your current shake?</h2>
-  <p>Find a delicious protein shake!</p>
 
   <div class="row col-xs-12">
-    Search by: 
-    <label ng-repeat="option in vm.searchOptions">
-      <input type="checkbox" ng-model="option.checked"/> {{option.name}}
-    </label>
+    <form>
+        <label>Low Calorie:
+          <input type="checkbox" ng-model="vm.searchOptions.lowCal">
+        </label><br/>
+        <label>Low Carb:
+          <input type="checkbox" ng-model="vm.searchOptions.lowCarb">
+        </label><br/>
+        <label>High Protein:
+          <input type="checkbox" ng-model="vm.searchOptions.highProtein">
+        </label><br/>
+        <label>High Fat:
+          <input type="checkbox" ng-model="vm.searchOptions.highFat">
+        </label><br/>    
+        <label>Low Fat:
+          <input type="checkbox" ng-model="vm.searchOptions.lowFat">
+        </label><br/>
+    </form>
   </div>
 
   <form name="search" style="margin-top:20px;" class="col-xs-12">
     <fieldset class="row">
       <div class="input-group">
         <input autocomplete="off" id="searchText" name="searchText" class="form-control"
-               ng-model="vm.searchText" placeholder="search" autofocus>
+               ng-model="vm.searchText" placeholder="search by name or ingredients" autofocus>
         <span class="input-group-btn">
           <button class="btn btn-primary" ng-click="vm.search();">Search</button>
         </span>
       </div>
     </fieldset>
   </form>
-
-  <div class="row col-xs-12">
-    Or Select a filter:
-    <form>
-      <select ng-model="vm.selectedFilter">
-        <option ng-repeat="option in vm.filterKeywords" value="{{option.value}}">{{ option.name }}</option>
-      </select>
-    </form>
-  </div>
 
   <!--- Results ---->
   <div  class="row col-xs-12" style="margin-top:50px;text-align:center">

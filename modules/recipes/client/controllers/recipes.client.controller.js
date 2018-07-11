@@ -37,11 +37,11 @@
       enableRowSelection: true, 
       multiSelect: false, 
       columnDefs: [
-        { field: "name",          name: "Name",         visible: true, width: '40%' },
-        { field: "calories",      name: "Calories",     visible: true },
-        { field: "proteinGrams",  name: 'Protein (g)',  visible: true },
-        { field: "carbsGrams",    name: 'Carbs (g)',    visible: true },
-        { field: "fatGrams",      name: 'Fat (g)',      visible: true },
+        { field: "name",      name: "Name",         visible: true, width: '40%' },
+        { field: "calories",  name: "Calories",     visible: true },
+        { field: "protein",   name: 'Protein (g)',  visible: true },
+        { field: "carbs",     name: 'Carbs (g)',    visible: true },
+        { field: "fat",       name: 'Fat (g)',      visible: true },
         { 
           field: "null",
           name: " ",
@@ -57,12 +57,12 @@
         loadRecipeDetails(row.entity);
       });
     };
-  
+
     vm.toggleVisibleRow = function(columnName){
       var indexes = vm.columnMap[columnName].index;
       indexes.forEach(index => vm.resultsGrid.columnDefs[index].visible = vm.columnMap[columnName].visibility);
       $scope.gridApi.core.refresh();
-    }
+    };
 
     function columnMapIndex(name, index, visibility) {
       return {
@@ -75,23 +75,28 @@
       name: new columnMapIndex("name", [0], true),
       calories: new columnMapIndex("calories", [1], true),
       macros: new columnMapIndex("macros", [2,3,4], true),
-    }
+    };
 
     vm.search = function() {
       $http({
         url: '/api/recipes/find',
         method: 'post',
         data: {
-          searchText: vm.searchText ? vm.searchText : ''
+          searchText: vm.searchText ? vm.searchText : '',
+          searchOptions: vm.searchOptions
         },
         headers: {
           'Content-Type': 'application/json'
         }
       }).then(
         response => {
-          if (response) {
+          if (response && response.data && response.data.length > 0) {
             RecipesService.data = response.data;
             vm.resultsGrid.data = response.data;
+          } else {
+            RecipesService.data = [];
+            vm.resultsGrid.data = [];
+            Notification.error('Please refine search criteria');
           }
         },
         err => {
@@ -99,20 +104,6 @@
           console.log(err);
         }
       );
-    };
-
-    vm.seed = function() {
-      $http({
-        url: '/api/recipes/seed',
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(function(response) {
-        if (response) {
-          console.log(response);
-        }
-      });
     };
 
     vm.insert = function() {
@@ -140,15 +131,13 @@
       );
     };
 
-    vm.searchOptions = [
-      {value:"ingredients", name:"Ingredients", checked:true},
-      {value:"name", name:"Name", checked:true}
-    ];
+    vm.searchOptions = {
+      'lowCal': false,
+      'lowCarb': false,
+      'highProtein': false,
+      'highFat': false,
+      'lowFat': false
+    };
 
-    vm.filterKeywords = [
-      {value:"lowCal", name:"Low Cal"},
-      {value:"highProtein", name:"High Protein"}
-    ]
-    
   }
 })();
