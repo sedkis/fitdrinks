@@ -30,18 +30,18 @@
       $state.go('recipes.details', { recipe: rowEntity });
     };
 
-    vm.resultsGrid = { 
-      data: RecipesService.data, 
-      enableFullRowSelection: true, 
-      enableRowHeaderSelection: false, 
-      enableRowSelection: true, 
-      multiSelect: false, 
+    vm.resultsGrid = {
+      data: RecipesService.data,
+      enableFullRowSelection: true,
+      enableRowHeaderSelection: false,
+      enableRowSelection: true,
+      multiSelect: false,
       columnDefs: [
         { field: "name",      name: "Name",         visible: true, width: '40%' },
-        { field: "calories",  name: "Calories",     visible: true },
-        { field: "protein",   name: 'Protein (g)',  visible: true },
-        { field: "carbs",     name: 'Carbs (g)',    visible: true },
-        { field: "fat",       name: 'Fat (g)',      visible: true },
+        { field: "calories",  name: "Calories",     visible: true,  type: 'number' },
+        { field: "protein",   name: 'Protein (g)',  visible: true,  type: 'number' },
+        { field: "carbs",     name: 'Carbs (g)',    visible: true,  type: 'number' },
+        { field: "fat",       name: 'Fat (g)',      visible: true,  type: 'number' },
         { 
           field: "null",
           name: " ",
