@@ -17,6 +17,8 @@ var _ = require('lodash'),
       'gulp-angular-templatecache': 'templateCache'
     }
   }),
+  mongoose = require('./config/lib/mongoose.js'),
+  XLSX = require('xlsx'),
   pngquant = require('imagemin-pngquant'),
   wiredep = require('wiredep').stream,
   path = require('path'),
@@ -361,9 +363,6 @@ gulp.task('karma:coverage', function(done) {
 
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
-  // Use mongoose configuration
-  var mongoose = require('./config/lib/mongoose.js');
-
   mongoose.connect(function (db) {
     db.connection.db.dropDatabase(function (err) {
       if (err) {
@@ -373,6 +372,54 @@ gulp.task('dropdb', function (done) {
       }
       db.connection.db.close(done);
     });
+  });
+});
+
+gulp.task('seeddb', function(done) {
+  console.log('trying to connect');
+
+  mongoose.loadModels();
+  var Recipe = require('mongoose').model('Recipe');
+
+  mongoose.connect(function (db) {
+    console.log('connected.  attempting to seed collection...');
+    var workbook = XLSX.readFile('./recipes.xlsx').Sheets;
+    var worksheet = workbook.All;
+    var worksheetArray = XLSX.utils.sheet_to_json(worksheet);
+
+    console.log('wiping collection.');
+    Recipe.remove({}).exec(); // Clears all entries
+    console.log('done. now seeding.');
+
+    var rowCount = 0,
+      processedCount = 0,
+      errorCount = 0;
+
+    worksheetArray.forEach(function(row) {
+      rowCount++;
+      try {
+        var recipe = new Recipe();
+        recipe.name = row.name;
+        recipe.ingredients = row.ingredients.split(',');
+        recipe.fat = row.fat || 0;
+        recipe.protein = row.protein || 0;
+        recipe.carbs = row.carbs || 0;
+        recipe.calories = (recipe.fat * 9) + (recipe.protein * 4) + (recipe.carbs * 4);
+
+        recipe.save(function(error, data) {
+          if (error) {
+            console.log('ERROR: ' + error);
+            errorCount++;
+          } else {
+            processedCount++;
+          }
+        });
+      } catch (e) { console.log('Error while seeding row: '); console.log(row); console.log('\n' + e);}
+    });
+
+    console.log('Seed completed, total rows: ' + rowCount + '\nrows processed: ' + processedCount + '\nnum errors: ' + errorCount);
+
+    db.connection.db.close(done);
   });
 });
 
