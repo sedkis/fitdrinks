@@ -46,7 +46,7 @@ WORKDIR /opt/mean.js
 # when the local package.json file changes.
 # Install npm packages
 COPY package.json /opt/mean.js/package.json
-RUN NODE_ENV=development npm install --quiet && npm cache clean
+RUN NODE_ENV=development npm install ---verbose && npm cache clean
 
 # Install bower packages
 COPY bower.json /opt/mean.js/bower.json
