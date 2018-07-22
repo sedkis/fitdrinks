@@ -60,4 +60,4 @@ ENV NODE_ENV production
 COPY . /opt/mean.js
 
 # Run MEAN.JS server
-CMD ["npm","run-script","start:prod"]
+CMD ["npm","run-script","start"]
