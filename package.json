@@ -22,7 +22,7 @@
     "start:prod": "gulp prod",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
-    "bower": "bower install",
+    "bower": "bower install --allow-root",
     "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
