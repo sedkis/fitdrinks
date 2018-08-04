@@ -3,7 +3,7 @@
 
   angular
     .module('recipes.listing', ['ui.grid', 'ui.grid.selection'])
-    .controller('RecipesController', RecipesController);
+    .controller('RecipesListingController', RecipesController);
 
   RecipesController.$inject = [
     '$http',
