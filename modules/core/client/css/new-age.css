@@ -806,7 +806,7 @@ section.contact ul.list-social li.social-google-plus a:hover {
   height: 100%!important;
 }
 
-.row {
+.main-header.row {
   display: flex;
   flex-wrap: wrap;
 }
