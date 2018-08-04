@@ -527,6 +527,11 @@ header.masthead .header-content {
   max-width: 500px;
   margin-bottom: 100px;
   text-align: center;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+.mb-5 {
+  margin-bottom: 3rem!important;
 }
 header.masthead .header-content h1 {
   font-size: 30px;
@@ -790,4 +795,9 @@ section.contact ul.list-social li.social-google-plus a:hover {
 .btn-xl {
   font-size: 11px;
   padding: 15px 45px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
