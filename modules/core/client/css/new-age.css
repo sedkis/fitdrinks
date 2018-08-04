@@ -801,3 +801,17 @@ section.contact ul.list-social li.social-google-plus a:hover {
   max-width: 100%;
   height: auto;
 }
+
+.h-100 {
+  height: 100%!important;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-auto {
+  margin-bottom: auto!important;
+  margin-top: auto!important; 
+}
