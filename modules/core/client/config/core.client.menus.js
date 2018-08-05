@@ -38,5 +38,18 @@
       title: 'Manage Social Accounts',
       state: 'settings.accounts'
     });
+
+    menuService.addMenuItem('topbar', {
+      title: 'Home',
+      state: 'home',
+      roles: ['*']
+    });
+
+    menuService.addMenuItem('topbar', {
+      title: 'Get Started',
+      state: 'recipes.home',
+      roles: ['*']
+    });
+
   }
 }());
