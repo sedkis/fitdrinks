@@ -27,7 +27,14 @@
       return _.isEqual(this.filters, filters);
     }
 
+    // We don't want to lose sort settings on state switch
+    var sortFilters = {
+      sortType: 'name',
+      sortDirection: 'desc'
+    };
+
     return {
+      sortFilters: sortFilters,
       results: results,
       filters: angular.copy(filters),
       resetFilters: resetFilters,

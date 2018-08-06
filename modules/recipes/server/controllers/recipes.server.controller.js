@@ -38,19 +38,19 @@ exports.find = function(req, res) {
     query.$and.push({ ingredients: new RegExp(req.body.ingredients, 'i') });
   }
 
-  if (req.body.protein.moreThan)
+  if (req.body.protein && req.body.protein.moreThan)
     query.$and.push({ protein: { $gt: req.body.protein.moreThan } });
-  if (req.body.protein.lessThan)
+  if (req.body.protein && req.body.protein.lessThan)
     query.$and.push({ protein: { $lt: req.body.protein.lessThan } });
 
-  if (req.body.fat.moreThan)
+  if (req.body.fat && req.body.fat.moreThan)
     query.$and.push({ fat: { $gt: req.body.fat.moreThan } });
-  if (req.body.fat.lessThan)
+  if (req.body.fat && req.body.fat.lessThan)
     query.$and.push({ fat: { $lt: req.body.fat.lessThan } });
 
-  if (req.body.carbs.moreThan)
+  if (req.body.carbs && req.body.carbs.moreThan)
     query.$and.push({ carbs: { $gt: req.body.carbs.moreThan } });
-  if (req.body.carbs.lessThan)
+  if (req.body.carbs && req.body.carbs.lessThan)
     query.$and.push({ carbs: { $lt: req.body.carbs.lessThan } });
 
   Recipe.find(query,

@@ -154,3 +154,7 @@ section.container.recipes .recipe-result:hover {
 	background-color: white;
 	color: #fdcc52;
 }
+
+#sort-options select {
+	background-color: white;
+}

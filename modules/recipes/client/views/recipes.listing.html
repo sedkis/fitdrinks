@@ -2,13 +2,33 @@
 
   <!--- Results ---->
   <p class="text-center" ng-if="vm.results.length > 0">Click a recipe for details</p>
+
+  <div ng-if="vm.results.length > 0" class="center" id="sort-options">
+    <label>sort by:</label>
+    <select ng-model="vm.sortFilters.sortType">
+      <option value="name">Alphabetical</option>
+      <option value="calories">Calories</option>
+      <option value="protein">Protein</option>
+      <option value="fat">Fat</option>
+      <option value="carbs">Carbs</option>
+    </select>
+
+    <label style="padding-left:30px">order:</label> 
+    <select ng-model="vm.sortFilters.sortDirection">
+      <option value="desc">Descending</option>
+      <option value="asc">Ascending</option>
+    </select>
+
+    <button style="background-color: white; margin-left:30px; width: 100px" ng-click="vm.sortResults()">Sort</button>
+  </div>
+
   <div ng-click="vm.loadDetails(recipe)" class="recipe-result" ng-repeat="recipe in vm.results | limitTo: 5">
     <p>{{ recipe.name }}</p>
   </div>
 
   <div class="recipes-listing-buttons center">
     <p ng-if="vm.results.length>5">(5) results limit</p>
-    <a href="/recipes/home" class="main btn btn-outline btn-xl js-scroll-trigger">Edit Existing</a>
+    <a ng-click="vm.editCurrent()" class="main btn btn-outline btn-xl js-scroll-trigger">Edit Existing</a>
     <a ng-click="vm.startOver()" class="btn btn-outline btn-xl js-scroll-trigger">Start Over</a>
   </div>
 
