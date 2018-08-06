@@ -6,25 +6,13 @@
     .controller('CarbsController', CarbsController);
 
   CarbsController.$inject = [
-    '$http',
-    '$scope',
-    '$state',
-    'RecipesService',
-    'Notification'
+    'RecipesService'
   ];
 
   function CarbsController(
-    $http,
-    $scope,
-    $state,
-    RecipesService,
-    Notification
+    RecipesService
   ) {
     var vm = this;
-
-    vm.loadNextStep = function() {
-      $state.go('recipes.results');
-    };
-
+    vm.filters = RecipesService.filters;
   }
 })();

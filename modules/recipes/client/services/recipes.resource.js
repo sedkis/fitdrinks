@@ -9,20 +9,21 @@
   RecipesResource.$inject = ['$resource'];
 
   function RecipesResource($resource) {
-    var Recipes = $resource(
-      '/api/users', {},
-      {
-        insert: {
-          method: 'PUT'
-        },
-        updatePassword: {
-          method: 'POST',
-          url: '/api/users/password'
+    var recipes = function () {
+      $resource(
+      '/api/recipes', {},
+        {
+          find: {
+            url: '/find',
+            method: 'POST'
+          }
         }
-      }
     );
+    };
 
-    return Recipes;
+    return {
+      recipes: recipes
+    };
   }
 
-}());
+})();

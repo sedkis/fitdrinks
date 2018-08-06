@@ -6,20 +6,32 @@
     .module('recipes')
     .factory('RecipesService', RecipesService);
 
-  RecipesService.$inject = ['$window'];
+  RecipesService.$inject = [];
 
   function RecipesService() {
+
     var data = [];
-    var filters = {
-      ingredients: [],
+
+    const filters = {
+      ingredients: '',
       protein: {},
       fat: {},
       carbs: {}
     };
 
+    function resetFilters() {
+      this.filters = angular.copy(filters);
+    }
+
+    function isFiltersEmpty() {
+      return _.isEqual(this.filters, filters);
+    }
+
     return {
       data: data,
-      filters: filters
+      filters: angular.copy(filters),
+      resetFilters: resetFilters,
+      isFiltersEmpty: isFiltersEmpty
     };
   }
 }());

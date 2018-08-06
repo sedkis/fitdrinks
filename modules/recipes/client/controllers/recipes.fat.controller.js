@@ -6,21 +6,13 @@
     .controller('FatController', FatController);
 
   FatController.$inject = [
-    '$http',
-    '$scope',
-    '$state',
-    'RecipesService',
-    'Notification'
+    'RecipesService'
   ];
 
   function FatController(
-    $http,
-    $scope,
-    $state,
-    RecipesService,
-    Notification
+    RecipesService
   ) {
     var vm = this;
-
+    vm.filters = RecipesService.filters;
   }
 })();

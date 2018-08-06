@@ -12,10 +12,10 @@
   <div ng-if="vm.visible" class="col-xs-12">
     <h3 class="text-align-center bold">Carbs</h3>
     <div class="row col-xs-12 gram-input">
-      <p>More than </p> <input type="number" placeholder="grams of carbs">
+      <p>More than </p> <input ng-model="vm.filters.carbs.moreThan" type="number" type="number" placeholder="grams of carbs">
     </div>
     <div class="row col-xs-12 gram-input">
-      <p>Less than </p> <input type="number" placeholder="grams of carbs">
+      <p>Less than </p> <input ng-model="vm.filters.carbs.lessThan" type="number" type="number" placeholder="grams of carbs">
     </div>
     <div class=center><a href="/recipes/listing" class="btn btn-outline btn-xl js-scroll-trigger">Next</a></div>
   </div>

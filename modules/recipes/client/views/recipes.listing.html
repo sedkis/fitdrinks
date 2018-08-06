@@ -1,5 +1,11 @@
 <section class="container recipes recipes-container">
 
   <!--- Results ---->
+  yep: {{ vm.filters }}
+
+  <div class="recipes-listing-buttons center">
+    <a ng-click="vm.startOver()" class="btn btn-outline btn-xl js-scroll-trigger">Start Over</a>
+    <a href="/recipes/home" class="btn btn-outline btn-xl js-scroll-trigger">Edit Existing</a>
+  </div>
 
 </section>

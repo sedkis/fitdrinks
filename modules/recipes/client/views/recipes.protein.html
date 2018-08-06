@@ -13,10 +13,10 @@
     <h3 class="text-align-center bold">Protein</h3>
     <p>The final smoothie, with all ingredients, will include:</p>
     <div class="row col-xs-12 gram-input">
-      <p>More than </p> <input type="number" placeholder="grams of protein">
+      <p>More than </p> <input ng-model="vm.filters.protein.moreThan" type="number" placeholder="grams of protein">
     </div>
     <div class="row col-xs-12 gram-input">
-      <p>Less than </p> <input type="number" placeholder="grams of protein">
+      <p>Less than </p> <input ng-model="vm.filters.protein.lessThat" type="number" placeholder="grams of protein">
     </div>
     <div class=center><a href="/recipes/fat" class="btn btn-outline btn-xl js-scroll-trigger">Next</a></div>
   </div>

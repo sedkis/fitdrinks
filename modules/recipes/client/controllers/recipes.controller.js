@@ -6,14 +6,12 @@
     .controller('RecipesController', RecipesController);
 
   RecipesController.$inject = [
-    '$http',
-    '$scope',
-    '$state',
-    'RecipesService',
-    'Notification'
+    'RecipesService'
   ];
 
-  function RecipesController() {
+  function RecipesController(RecipesService) {
     var vm = this;
+
+    vm.filters = RecipesService.filters;
   }
 })();

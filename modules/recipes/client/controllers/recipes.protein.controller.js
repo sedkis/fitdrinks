@@ -6,21 +6,13 @@
     .controller('ProteinController', ProteinController);
 
   ProteinController.$inject = [
-    '$http',
-    '$scope',
-    '$state',
-    'RecipesService',
-    'Notification'
+    'RecipesService'
   ];
 
   function ProteinController(
-    $http,
-    $scope,
-    $state,
-    RecipesService,
-    Notification
+    RecipesService
   ) {
     var vm = this;
-
+    vm.filters = RecipesService.filters;
   }
 })();

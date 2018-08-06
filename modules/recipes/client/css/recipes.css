@@ -126,3 +126,11 @@ section.recipes .btn.btn-outline.btn-xl.js-scroll-trigger:hover {
 .bold {
 	font-weight: 900;
 }
+
+.recipes-listing-buttons {
+	padding-top: 50px;
+}
+.recipes-listing-buttons a {
+	width: 200px;
+	margin: 10px;
+}
