@@ -22,9 +22,5 @@
   ) {
     var vm = this;
 
-    vm.loadNextStep = function() {
-      $state.go('recipes.fat');
-    };
-
   }
 })();

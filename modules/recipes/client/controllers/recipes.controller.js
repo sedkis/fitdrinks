@@ -13,18 +13,7 @@
     'Notification'
   ];
 
-  function RecipesController(
-    $http,
-    $scope,
-    $state,
-    RecipesService,
-    Notification
-  ) {
+  function RecipesController() {
     var vm = this;
-
-    vm.loadNextStep = function() {
-      $state.go('recipes.protein');
-    };
-
   }
 })();

@@ -1,6 +1,24 @@
-<section class="container">
+<section class="container recipes">
 
-  <h2>Step 1 </h2>
-  <button ng-click="vm.loadNextStep()">next</button>
+  <h2 class="text-align-center"> Let's find you something to drink</h2>
+  <br>
+
+  <section class="recipes-body fade-in" ng-if="!vm.visible">
+    <p class="text-align-center">Do you want the recipes to include a certain ingredient(s)?</p>
+    <div class="center">
+      <a ng-click="vm.visible = true" class="btn btn-outline btn-xl js-scroll-trigger">Yes</a>
+      <a href="/recipes/protein" class="btn btn-outline btn-xl js-scroll-trigger">No</a>
+    </div>
+  </section>
+
+  <div ng-if="vm.visible" class="col-xs-12">
+    <h3 class="text-align-center">Includes These Ingredients</h3>
+    <div class="row col-xs-12 gram-input">
+      <input ng-model="vm.filters." type="text" placeholder="Seperate by space">
+    </div>
+    <div class="gram-submit center"><a href="/recipes/protein" class="btn btn-outline btn-xl js-scroll-trigger">Next</a></div>
+    <br><br>
+    <p style="font-size: 12px">tip: Please keep your keywords simple, ie: "vanilla" instead of "vanilla protein powder", or "mango" instead of "mangoes" </p>
+  </div>
 
 </section>

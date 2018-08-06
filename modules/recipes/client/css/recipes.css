@@ -38,3 +38,91 @@ div.ingredients-div {
 div.ingredients-div p {
 	margin-bottom: 0px;
 }
+section.container.recipes {
+	background-color: #fdcc52;
+	height: 100%;
+	min-height: 100vh;
+	width: 100vw;
+}
+.text-align-center {
+	text-align:center;
+}
+.recipes-body a {
+	margin: 0 5px;
+	text-align: center;
+}
+div.center {
+	width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* cancels the weird delay for ng-if */
+.fade-in.ng-animate { 
+	-webkit-animation: none 0s; 
+	-moz-animation: none 0s;  /* Firefox < 16 */
+	 -ms-animation: none 0s;  /* Internet Explorer */
+	  -o-animation: none 0s;  /* Opera < 12.1 */
+		 animation: none 0s;
+}
+
+.fade-in {
+	-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: fadein 2s; /* Firefox < 16 */
+	 -ms-animation: fadein 2s; /* Internet Explorer */
+	  -o-animation: fadein 2s; /* Opera < 12.1 */
+		 animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.gram-input {
+	text-align: center;
+}
+.gram-input p {
+	display: inline-block;
+}
+.gram-input input[type=text] {
+	width: 100%;
+	max-width: 250px;
+	min-width: 150px;	
+}
+
+.gram-submit {
+	padding-top: 75px;
+} 
+
+section.recipes .btn.btn-outline.btn-xl.js-scroll-trigger:hover {
+	color: #fdcc52;
+	background-color: white;
+}
+
+.bold {
+	font-weight: 900;
+}

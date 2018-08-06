@@ -10,9 +10,16 @@
 
   function RecipesService() {
     var data = [];
+    var filters = {
+      ingredients: [],
+      protein: {},
+      fat: {},
+      carbs: {}
+    };
 
     return {
-      data: data
+      data: data,
+      filters: filters
     };
   }
 }());
