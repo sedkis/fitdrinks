@@ -149,3 +149,8 @@ section.container.recipes .recipe-result {
 section.container.recipes .recipe-result:hover {
 	background-color: wheat;
 }
+
+.main.btn.btn-outline.btn-xl {
+	background-color: white;
+	color: #fdcc52;
+}

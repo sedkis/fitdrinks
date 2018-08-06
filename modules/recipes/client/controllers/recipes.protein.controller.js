@@ -14,5 +14,6 @@
   ) {
     var vm = this;
     vm.filters = RecipesService.filters;
+    vm.visible = vm.filters.protein.moreThan || vm.filters.protein.lessThan;
   }
 })();

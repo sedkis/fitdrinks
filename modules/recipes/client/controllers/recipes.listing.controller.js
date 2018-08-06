@@ -24,24 +24,16 @@
 
     vm.filters = RecipesService.filters;
     vm.results = RecipesService.results;
-    // todo: remove
-    vm.filters = {
-      carbs: {},
-      fat: {},
-      ingredients: '',
-      protein: { moreThan: 15 }
-    };
 
     var startOver = function() {
       RecipesService.resetFilters();
       $state.go('recipes.home');
     };
 
-    // if (RecipesService.isFiltersEmpty()) {
-    //   // display notification too?
-    //   alert('please select at least one option');
-    //   startOver();
-    // }
+    if (RecipesService.isFiltersEmpty()) {
+      alert('please select at least one option');
+      startOver();
+    }
 
     $http(
       {
@@ -57,6 +49,8 @@
       function(response) {
         if (!response.data || !response.data.length || response.data.length === 0) {
           alert('no results found.  please refine your search criteria.');
+          RecipesService.results = [];
+          vm.results = RecipesService.results;
           return;
         }
 
