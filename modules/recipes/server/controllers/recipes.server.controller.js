@@ -21,44 +21,52 @@ var path = require('path'),
  * @param res returns all matching Recipe models.
  */
 exports.find = function(req, res) {
-  if (!req.body.searchText && !req.body.searchOptions)
-    return res.status(400).json({ error: 'Enter search criteria' });
-  // TODO
-  // needs a more optimized query.  this is an expensive search that runs
-  // two regex against two fields
-  var searchQueryObject = {
-    $or: [
-      { ingredients: new RegExp(req.body.searchText, 'i') },
-      { name: new RegExp(req.body.searchText, 'i') }
-    ]
-  };
-
-  if (req.body.searchOptions) {
-    searchQueryObject.$and = [{ calories: { $ne: '0' } }];
-
-    if (req.body.searchOptions.lowCal)
-      searchQueryObject.$and.push({ calories: { $lt: '200' } });
-    if (req.body.searchOptions.lowCarb)
-      searchQueryObject.$and.push({ carbs: { $lt: '20' } });
-    if (req.body.searchOptions.highProtein)
-      searchQueryObject.$and.push({ protein: { $gte: '20' } });
-    if (req.body.searchOptions.highFat)
-      searchQueryObject.$and.push({ fat: { $gte: '20' } });
-    if (req.body.searchOptions.lowFat)
-      searchQueryObject.$and.push({ fat: { $lt: '20' } });
+  if (!req.body ||
+  (!req.body.ingredients &&
+    !req.body.protein.moreThan &&
+    !req.body.protein.lessThan &&
+    !req.body.fat.moreThan &&
+    !req.body.fat.lessThan &&
+    !req.body.carbs.moreThan &&
+    !req.body.carbs.lessThan)) {
+    return res.status(200).json({ error: 'Enter search criteria' });
   }
 
-  Recipe.find(searchQueryObject,
+  var query = { $and: [] };
+
+  if (req.body.ingredients) {
+    query.$and.push({ ingredients: new RegExp(req.body.ingredients, 'i') });
+  }
+
+  if (req.body.protein.moreThan)
+    query.$and.push({ protein: { $gt: req.body.protein.moreThan } });
+  if (req.body.protein.lessThan)
+    query.$and.push({ protein: { $lt: req.body.protein.lessThan } });
+
+  if (req.body.fat.moreThan)
+    query.$and.push({ fat: { $gt: req.body.fat.moreThan } });
+  if (req.body.fat.lessThan)
+    query.$and.push({ fat: { $lt: req.body.fat.lessThan } });
+
+  if (req.body.carbs.moreThan)
+    query.$and.push({ carbs: { $gt: req.body.carbs.moreThan } });
+  if (req.body.carbs.lessThan)
+    query.$and.push({ carbs: { $lt: req.body.carbs.lessThan } });
+
+  Recipe.find(query,
     function(errs, recipes) {
       if (errs) {
         res.status(500).send('internal error');
         console.log(errs);
       } else {
+
+        // todo: convert outgoing to a DTO
+
         console.log('recipes found: ' + recipes.length);
         res.status(200).json(recipes);
       }
     }
-  ).limit(10);
+  ).limit(6);
 };
 
 /**

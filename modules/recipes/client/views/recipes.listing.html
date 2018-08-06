@@ -1,9 +1,13 @@
 <section class="container recipes recipes-container">
 
   <!--- Results ---->
-  yep: {{ vm.filters }}
+  <p class="text-center" ng-if="vm.results.length > 0">Click a recipe for details</p>
+  <div ng-click="vm.loadDetails(recipe)" class="recipe-result" ng-repeat="recipe in vm.results | limitTo: 5">
+    <p>{{ recipe.name }}</p>
+  </div>
 
   <div class="recipes-listing-buttons center">
+    <p ng-if="vm.results.length>5">(5) results limit</p>
     <a ng-click="vm.startOver()" class="btn btn-outline btn-xl js-scroll-trigger">Start Over</a>
     <a href="/recipes/home" class="btn btn-outline btn-xl js-scroll-trigger">Edit Existing</a>
   </div>

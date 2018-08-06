@@ -134,3 +134,18 @@ section.recipes .btn.btn-outline.btn-xl.js-scroll-trigger:hover {
 	width: 200px;
 	margin: 10px;
 }
+
+section.container.recipes .recipe-result {
+	border: white;
+    border-style: solid;
+	border-radius: 41px;
+	text-align: center;
+	margin: 20px auto;
+	padding: 20px 0;
+	max-width: 600px;
+	cursor: pointer;
+}
+
+section.container.recipes .recipe-result:hover {
+	background-color: wheat;
+}

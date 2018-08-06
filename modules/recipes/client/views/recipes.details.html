@@ -1,21 +1,25 @@
-<div class="recipes-container">
-  <h2> {{ vm.details.name }} </h2>
+<section class="container recipes recipes-container">
+  <h3> {{ vm.details.name }} </h3>
+  
+  <br>
 
-  <div class="row">
-    <div class="col-xs-4">
-      <label>Nutritional</label>{{ vm.details.fat }}
-    </div>
-    <div class="col-xs-8">
-      <label>Ingredients</label>
-      <div class="ingredients-div">
-        <p ng-repeat="ingredient in vm.details.ingredients track by $index">
-          {{ingredient}}
-        </p>
-      </div>
-    </div>
+  <div class="col-xs-12 col md-6">
+    <label>Nutritional</label>
+    <ul>
+      <li>Calories: {{ vm.details.calories }}</li>
+      <li>Protein: {{ vm.details.protein }}</li>
+      <li>Fat: {{ vm.details.fat }}</li>
+      <li>Carbs: {{ vm.details.carbs }}</li>
+    </ul>
   </div>
 
+  <div class="col-xs-12 col-md-6">
+    <label>Ingredients</label>
+    <ul>
+      <li ng-repeat="ingredient in vm.details.ingredients">{{ ingredient }}</li>
+    </ul>
+  </div>
 
-  <button class="pull-right" ng-click="$back()">BACK</button>
+  <a ng-click="$back()" class="pull-right btn btn-outline btn-xl js-scroll-trigger">Back</a>
 
-</div>
+</section>

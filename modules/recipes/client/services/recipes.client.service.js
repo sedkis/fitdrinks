@@ -10,7 +10,7 @@
 
   function RecipesService() {
 
-    var data = [];
+    var results = [];
 
     const filters = {
       ingredients: '',
@@ -28,7 +28,7 @@
     }
 
     return {
-      data: data,
+      results: results,
       filters: angular.copy(filters),
       resetFilters: resetFilters,
       isFiltersEmpty: isFiltersEmpty

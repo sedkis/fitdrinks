@@ -7,37 +7,77 @@
 
   Controller.$inject = [
     '$http',
-    '$scope',
     '$state',
     'RecipesService',
     'Notification',
-    'RecipesResource',
+    // 'RecipesResource',
   ];
 
   function Controller(
     $http,
-    $scope,
     $state,
     RecipesService,
-    Notification,
-    RecipesResource
+    Notification
+    // RecipesResource
   ) {
     var vm = this;
 
     vm.filters = RecipesService.filters;
+    vm.results = RecipesService.results;
+    // todo: remove
+    vm.filters = {
+      carbs: {},
+      fat: {},
+      ingredients: '',
+      protein: { moreThan: 15 }
+    };
 
-    RecipesResource.recipes().find();
-
-    vm.startOver = function() {
+    var startOver = function() {
       RecipesService.resetFilters();
       $state.go('recipes.home');
     };
 
-    if (RecipesService.isFiltersEmpty()) {
-      // display notification too?
-      alert('please select at least one option');
-      vm.startOver();
-    }
+    // if (RecipesService.isFiltersEmpty()) {
+    //   // display notification too?
+    //   alert('please select at least one option');
+    //   startOver();
+    // }
+
+    $http(
+      {
+        method: 'post',
+        url: '/api/recipes/find',
+        data: vm.filters,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then(
+      function(response) {
+        if (!response.data || !response.data.length || response.data.length === 0) {
+          alert('no results found.  please refine your search criteria.');
+          return;
+        }
+
+        RecipesService.results = response.data;
+        vm.results = RecipesService.results;
+
+        _.forEach(vm.results, function(recipe) {
+          recipe.name = _.startCase(_.lowerCase(recipe.name));
+        });
+      },
+      function(error) {
+        console.log(error); // todo: remove
+        Notification.error(error);
+      }
+    );
+
+    vm.loadDetails = function (recipe) {
+      $state.go('recipes.details', { recipe: recipe });
+    };
+
+    vm.startOver = startOver;
 
   }
 })();
