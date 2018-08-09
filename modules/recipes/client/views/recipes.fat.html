@@ -1,0 +1,23 @@
+<section class="container recipes">
+
+  <section class="recipes-body fade-in" ng-if="!vm.visible">
+    <p class="text-align-center">Do you want to add a <b>fat</b> filter?</p>
+    <div class="center">
+      <a ng-click="vm.visible = true" class="btn btn-outline btn-xl js-scroll-trigger">Yes</a>
+      <a href="/recipes/carbs" class="btn btn-outline btn-xl js-scroll-trigger">No</a>
+    </div>
+  </section>
+  
+  <!-- Fat -->
+  <div ng-if="vm.visible" class="col-xs-12">
+    <h3 class="text-align-center bold">Fat</h3>
+    <div class="row col-xs-12 gram-input">
+      <p>More than </p> <input ng-model="vm.filters.fat.moreThan" type="number" type="number" placeholder="grams of fat">
+    </div>
+    <div class="row col-xs-12 gram-input">
+      <p>Less than </p> <input ng-model="vm.filters.fat.lessThan" type="number" type="number" placeholder="grams of fat">
+    </div>
+    <div class=center><a href="/recipes/carbs" class="btn btn-outline btn-xl js-scroll-trigger">Next</a></div>
+  </div>
+
+</section>

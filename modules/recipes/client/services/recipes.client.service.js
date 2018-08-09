@@ -6,13 +6,39 @@
     .module('recipes')
     .factory('RecipesService', RecipesService);
 
-  RecipesService.$inject = ['$window'];
+  RecipesService.$inject = [];
 
   function RecipesService() {
-    var data = [];
+
+    var results = [];
+
+    const filters = {
+      ingredients: '',
+      protein: {},
+      fat: {},
+      carbs: {}
+    };
+
+    function resetFilters() {
+      this.filters = angular.copy(filters);
+    }
+
+    function isFiltersEmpty() {
+      return _.isEqual(this.filters, filters);
+    }
+
+    // We don't want to lose sort settings on state switch
+    var sortFilters = {
+      sortType: 'name',
+      sortDirection: 'desc'
+    };
 
     return {
-      data: data
+      sortFilters: sortFilters,
+      results: results,
+      filters: angular.copy(filters),
+      resetFilters: resetFilters,
+      isFiltersEmpty: isFiltersEmpty
     };
   }
 }());

@@ -1,55 +1,35 @@
-<section class="container search recipes-container">
-
-  <!---- Search for recipes ------>
-  <h2>Bored with your current shake?</h2>
-
-  <div class="row col-xs-12">
-    <form>
-        <label>Low Calorie:
-          <input type="checkbox" ng-model="vm.searchOptions.lowCal">
-        </label><br/>
-        <label>Low Carb:
-          <input type="checkbox" ng-model="vm.searchOptions.lowCarb">
-        </label><br/>
-        <label>High Protein:
-          <input type="checkbox" ng-model="vm.searchOptions.highProtein">
-        </label><br/>
-        <label>High Fat:
-          <input type="checkbox" ng-model="vm.searchOptions.highFat">
-        </label><br/>    
-        <label>Low Fat:
-          <input type="checkbox" ng-model="vm.searchOptions.lowFat">
-        </label><br/>
-    </form>
-  </div>
-
-  <form name="search" style="margin-top:20px;" class="col-xs-12">
-    <fieldset class="row">
-      <div class="input-group">
-        <input autocomplete="off" id="searchText" name="searchText" class="form-control"
-               ng-model="vm.searchText" placeholder="search by name or ingredients" autofocus>
-        <span class="input-group-btn">
-          <button class="btn btn-primary" ng-click="vm.search();">Search</button>
-        </span>
-      </div>
-    </fieldset>
-  </form>
+<section class="container recipes recipes-container">
 
   <!--- Results ---->
-  <div  class="row col-xs-12" style="margin-top:50px;text-align:center">
-    Show columns
-    <input type="checkbox" ng-model="vm.columnMap.name.visibility" ng-change="vm.toggleVisibleRow('name')"> <b>name</b>
-    <input type="checkbox" ng-model="vm.columnMap.calories.visibility" ng-change="vm.toggleVisibleRow('calories')"> <b>calories</b>
-    <input type="checkbox" ng-model="vm.columnMap.macros.visibility" ng-change="vm.toggleVisibleRow('macros')"> <b>macronutritients</b>
+  <p class="text-center" ng-if="vm.results.length > 0">Click a recipe for details</p>
 
-    <div class=row>
-      <div ui-grid="vm.resultsGrid" ui-grid-selection class="myGrid"></div>
-    </div>
+  <div ng-if="vm.results.length > 0" class="center" id="sort-options">
+    <label>sort by:</label>
+    <select ng-model="vm.sortFilters.sortType">
+      <option value="name">Alphabetical</option>
+      <option value="calories">Calories</option>
+      <option value="protein">Protein</option>
+      <option value="fat">Fat</option>
+      <option value="carbs">Carbs</option>
+    </select>
+
+    <label style="padding-left:30px">order:</label> 
+    <select ng-model="vm.sortFilters.sortDirection">
+      <option value="desc">Descending</option>
+      <option value="asc">Ascending</option>
+    </select>
+
+    <button style="background-color: white; margin-left:30px; width: 100px" ng-click="vm.sortResults()">Sort</button>
   </div>
 
-<!--
-  <button class="btn btn-primary" ng-click="vm.seed();">SEED</button>
-  
+  <div ng-click="vm.loadDetails(recipe)" class="recipe-result" ng-repeat="recipe in vm.results | limitTo: 5">
+    <p>{{ recipe.name }}</p>
+  </div>
 
+  <div class="recipes-listing-buttons center">
+    <p ng-if="vm.results.length>5">(5) results limit</p>
+    <a ng-click="vm.editCurrent()" class="main btn btn-outline btn-xl js-scroll-trigger">Edit Existing</a>
+    <a ng-click="vm.startOver()" class="btn btn-outline btn-xl js-scroll-trigger">Start Over</a>
+  </div>
 
 </section>
