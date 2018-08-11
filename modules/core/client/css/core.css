@@ -62,3 +62,10 @@ a:hover .header-profile-image {
 .ui-grid-contents-wrapper{
 	background-color: aliceblue;
 }
+
+.container.contact p {
+  color:white;
+}
+.container.contact p a {
+  text-decoration: underline;
+}
