@@ -69,6 +69,7 @@ module.exports = {
       }
     }
   },
+  analytics: false,
   livereload: true,
   seedDB: {
     seed: process.env.MONGO_SEED === 'true',
