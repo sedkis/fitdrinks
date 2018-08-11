@@ -39,7 +39,7 @@ div.ingredients-div p {
 	margin-bottom: 0px;
 }
 section.container.recipes {
-	background: url('../img/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);
+	background: url('../img/backgrounds/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);
 	height: 100%;
 	min-height: 100vh;
 	width: 100vw;
