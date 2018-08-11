@@ -24,7 +24,6 @@
 
     vm.filters = RecipesService.filters;
     vm.results = RecipesService.results;
-    vm.filters = { ingredients: 'mango', protein: {} };
 
     var startOver = function() {
       RecipesService.resetFilters();
