@@ -5,9 +5,10 @@ services:
     build:
      context: .
      dockerfile: Dockerfile-production
+    image: sedkis/fitdrinks
     container_name: meanjs
     ports:
-     - "80:8443"
+     - "3000:8443"
     environment:
      - NODE_ENV=production
      - DB_1_PORT_27017_TCP_ADDR=db
@@ -19,6 +20,7 @@ services:
     build:
      context: .
      dockerfile: Dockerfile-production
+    image: sedkis/fitdrinks
     entrypoint: /bin/true
     volumes:
      - /opt/mean.js
