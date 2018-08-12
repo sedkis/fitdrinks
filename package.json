@@ -20,6 +20,7 @@
     "reinstall": "npm cache clean && npm run clean && npm install",
     "start": "gulp",
     "start:prod": "gulp prod",
+    "start:prod:nobuild": "gulp prod:nobuild",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
     "bower": "bower install --allow-root",

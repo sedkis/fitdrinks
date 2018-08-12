@@ -495,3 +495,9 @@ gulp.task('default', function (done) {
 gulp.task('prod', function (done) {
   runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
 });
+
+// Run the project in production mode
+gulp.task('prod:nobuild', function (done) {
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'env:prod', 'lint', ['nodemon-nodebug', 'watch'], done);
+});
+

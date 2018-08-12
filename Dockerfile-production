@@ -52,6 +52,7 @@ RUN npm cache clean
 # Install bower packages
 COPY bower.json /opt/mean.js/bower.json
 COPY .bowerrc /opt/mean.js/.bowerrc
+#RUN bower install angular@1.7.2 --allow-root
 RUN bower install --allow-root 
 
 # Set development environment as default
@@ -59,5 +60,11 @@ ENV NODE_ENV production
 
 COPY . /opt/mean.js
 
+COPY gulpfile.js /opt/mean.js/gulpfile.js
+
+# need to have the 2 minified files precompiled and in same path as dockerfile before build image
+COPY application-89eb72e851.min.js /opt/mean.js/public/dist
+COPY application-a5d846df2c.min.css /opt/mean.js/public/dist
+
 # Run MEAN.JS server
-CMD ["npm","run-script","start:prod"]
+CMD ["npm","run-script","start:prod:nobuild"]
