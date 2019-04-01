@@ -2,7 +2,6 @@ version: '2'
 services:
   web:
     restart: always
-    build: .
     container_name: fitdrinks
     image: sedkis/fitdrinks
     ports:
@@ -15,17 +14,6 @@ services:
      - DB_1_PORT_27017_TCP_ADDR=db
     depends_on:
      - db
-    volumes_from:
-     - web-data
-  web-data:
-    build: .
-    image: sedkis/fitdrinks
-    entrypoint: /bin/true
-    volumes:
-     - ./:/opt/mean.js
-     - /opt/mean.js/node_modules
-     - /opt/mean.js/public
-     - /opt/mean.js/uploads
   db:
     image: mongo:3.2
     restart: always
