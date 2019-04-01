@@ -12,7 +12,7 @@ AngularJs (1.6.x)
 Insert / Search for Recipes
 Use UI Grid to display information
 
-Seed database using .xlsx server file
+Seed database using .xlsx server file by hitting the seed api ("/api/recipes/seed")
 
 This repo was forked off (http://meanjs.org/): 
 
