@@ -1,9 +1,14 @@
+# Tech Stack
 MongoDB with Mongoose
+
 NodeJs
+
 Express
+
 AngularJs (1.6.x)
 
-Functionality:
+
+# Functionality:
 Insert / Search for Recipes
 Use UI Grid to display information
 
