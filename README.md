@@ -17,3 +17,6 @@ Seed database using .xlsx server file by hitting the seed api ("/api/recipes/see
 This repo was forked off (http://meanjs.org/): 
 
 Deployed on EC2 using Docker
+
+# Running
+Simply copy the docker-compose file and run `docker-compose up` using either the dev or production yaml
